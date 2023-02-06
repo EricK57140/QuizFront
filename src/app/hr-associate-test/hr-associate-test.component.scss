@@ -1,0 +1,56 @@
+
+.demo-button{
+  margin-left: 2%;
+
+ }
+
+.menu{
+  height: 10%;
+  width: 100%;
+  color: #FF6F02;
+  background-color: #151b36;
+}
+
+ul{
+  display: flex;
+  justify-items: space-between;
+}
+
+a:hover{
+  cursor: pointer;
+}
+
+#list-questions{
+
+  width: 75%;
+}
+
+
+
+img{
+  width: 200px;
+}
+
+.mat-mdc-table {
+
+  max-height: 500px;
+  overflow: auto;
+  margin-left: 2%;
+
+}
+
+.mat-column-name {
+  height: auto;
+
+}
+
+
+.col2 {
+  display: flex;
+
+}
+
+#fieldQuestion{
+margin-left: 5%;
+  width:50%;
+  }

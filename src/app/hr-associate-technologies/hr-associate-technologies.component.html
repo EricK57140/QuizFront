@@ -1,0 +1,48 @@
+<app-hr-associate-top-banner></app-hr-associate-top-banner>
+<div>
+  <p></p>
+</div>
+
+<div id="page">
+  <div id="list-technologies">
+
+    <mat-table [dataSource]="listTechnologies" class="mat-elevation-z8">
+      <ng-container matColumnDef="idTechnology">
+        <mat-header-cell *matHeaderCellDef>ID technology</mat-header-cell>
+        <mat-cell *matCellDef="let technology"> {{technology?.idTechnology}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="nameTechnology">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let technology"> {{technology?.nameTechnology}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="technologyToDelete">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let technology">
+          <button mat-raised-button color="primary" class="buttonRefuse"
+            (click)="deleTetechnology(technology.idTechnology); getTechnologyList()">Delete</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  <div id="pageleft">
+
+    <h1>New technology</h1>
+    <form [formGroup]="formControl" (submit)="getTechnologyList();saveTechnology();">
+
+      <mat-form-field class="example-form" appearance="fill">
+        <mat-label>Name of technology</mat-label>
+        <input type="text" placeholder="nameTechnology" formControlName="nameTechnology" matInput />
+      </mat-form-field>
+      <button class="example-form" mat-raised-button color="primary" type="submit">Save</button>
+
+    </form>
+
+
+
+
+  </div>
+</div>

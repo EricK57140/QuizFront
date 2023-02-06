@@ -1,0 +1,33 @@
+<app-hr-associate-top-banner></app-hr-associate-top-banner>
+
+<div class="col2">
+  <div class="page">
+    <h1>Modify candidate {{user?.email}} </h1>
+
+    <form [formGroup]="formControl" class="d-flex flex-column" (submit)="onModification1(personID)">
+      <div class="choices">
+        <input matInput value="{{user?.personID}}" formControlName="personID" [readonly]="true" [hidden]="true"
+          matInput />
+
+        <mat-form-field appearance="fill">
+
+          <mat-label>Name</mat-label>
+          <input formControlName="name" matInput />
+
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Firstname</mat-label>
+          <input formControlName="firstName" matInput />
+        </mat-form-field>
+        <!-- <mat-form-field appearance="fill"> -->
+        <!-- <mat-label>email</mat-label>
+          <input matInput value="{{user?.email}}" formControlName="email" [readonly]="true" matInput />
+          </mat-form-field> -->
+
+
+        <button mat-raised-button color="primary" type="submit">Modify</button>
+      </div>
+    </form>
+  </div>
+</div>

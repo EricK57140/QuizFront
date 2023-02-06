@@ -1,0 +1,52 @@
+<app-hr-associate-top-banner></app-hr-associate-top-banner>
+<div>
+  <p></p>
+</div>
+
+<div>
+  <form [formGroup]="formControl" (submit)="saveTest()">
+
+    <mat-form-field class="example-form" appearance="fill" class="question" id="fieldQuestion">
+      <mat-label>Name of the test</mat-label>
+      <input type="text" placeholder="Test" formControlName="nameTest" matInput />
+    </mat-form-field>
+
+    <button class=" example-form" mat-raised-button color="primary" type="submit">Save</button>
+  </form>
+</div>
+
+<div id="list-questions">
+
+  <mat-table [dataSource]="listTests" class="mat-elevation-z8">
+    <ng-container matColumnDef="idTest">
+      <mat-header-cell *matHeaderCellDef>ID Test </mat-header-cell>
+      <mat-cell *matCellDef="let test"> {{test?.idTest}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+      <mat-cell *matCellDef="let test"> {{test?.nameTest}}</mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="testToEdit">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let test">
+        <button mat-raised-button color="accent" (click)="editTest(test?.idTest)">Edit</button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="testToDelete">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let test">
+        <button mat-raised-button color="warn" class="buttonRefuse"
+          (click)="deleteTest(test?.idTest); getTestsList()">Delete</button>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+</div>

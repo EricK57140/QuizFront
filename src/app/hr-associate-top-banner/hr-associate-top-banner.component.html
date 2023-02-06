@@ -1,0 +1,21 @@
+<div class="menu">
+  <ul class="nav flex">
+    <li>QUIZ APP</li>
+    <li>{{"Welcome" |translate}} {{userConnexion?.firstName}}</li>
+    <li></li>
+    <li> <a mat-raised-button href="hr-associate-candidates-page">{{"Candidates menu" |translate}}</a></li>
+    <li> <a mat-raised-button href="hr-associate-test">{{"Tests menu" |translate}}</a></li>
+    <li> <a mat-raised-button href="hr-associate-questions">{{"Questions menu" |translate}}</a></li>
+    <li>
+      <a mat-raised-button href="">Log out</a>
+      <!-- <img id="boutonDeconnexion" src="" alt="Déconnexion" (click)="deconnexion()"> -->
+    </li>
+    <li>
+      <select class="form-control" #selectedLang (change)="switchLanguage(selectedLang.value)">
+        <option *ngFor="let language of translate.getLangs()" [value]="language"
+          [selected]="language === translate.currentLang"> {{ language }}
+        </option>
+      </select>
+    </li>
+  </ul>
+</div>

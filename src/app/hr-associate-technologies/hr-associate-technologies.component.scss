@@ -1,0 +1,64 @@
+
+.demo-button{
+  margin-left: 2%;
+
+ }
+
+.menu{
+  height: 10%;
+  width: 100%;
+  color: #FF6F02;
+  background-color: #151b36;
+}
+
+#page{
+  margin-top: 5%;
+  display: flex;
+  justify-content: center ;
+  margin-left: -10%;
+  align-items: center
+
+}
+
+#pageleft{
+  margin-left: 10%;
+
+}
+
+a:hover{
+  cursor: pointer;
+}
+
+#list-technologies{
+
+  width: 20%;
+}
+
+
+
+img{
+  width: 200px;
+}
+
+.mat-mdc-table {
+
+  max-height: 500px;
+  overflow: auto;
+  margin-left: 2%;
+}
+
+.mat-column-name {
+  height: auto;
+}
+
+
+
+.col2 {
+  display: flex;
+
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}

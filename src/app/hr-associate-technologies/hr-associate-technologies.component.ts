@@ -59,7 +59,6 @@ export class HrAssociateTechnologiesComponent {
           )
           .subscribe()
       ) {
-        //this.technology = null;
         alert('Technology succesfully deleted');
       }
     }
@@ -77,8 +76,7 @@ export class HrAssociateTechnologiesComponent {
           },
           (error) => {
             if (error.status === 404) {
-              // Email does not exist, submit form
-              alert('ALready exist');
+              alert('Already exist');
             }
           }
         );
@@ -96,7 +94,7 @@ export class HrAssociateTechnologiesComponent {
       })
       .subscribe(
         (response) => {
-          alert('Technology name already'), Error;
+          alert('Technology name already exists'), Error;
         },
         (error) => {
           if (error.status === 404) {

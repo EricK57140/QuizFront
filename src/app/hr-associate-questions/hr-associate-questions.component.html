@@ -1,0 +1,64 @@
+<app-hr-associate-top-banner></app-hr-associate-top-banner>
+<div>
+  <p></p>
+</div>
+<div class="demo-button-container">
+  <a mat-raised-button color="red" href="hr-associate-create-question" class="demo-button">
+    Create Questions
+  </a>
+  <a mat-raised-button color="red" href="hr-associate-technologies" class="demo-button">
+    Technologies
+  </a>
+</div>
+
+
+<div id="list-questions">
+
+  <mat-table [dataSource]="listQuestions" class="mat-elevation-z8">
+    <ng-container matColumnDef="idQuestions">
+      <mat-header-cell *matHeaderCellDef>ID question </mat-header-cell>
+      <mat-cell *matCellDef="let question"> {{question?.idQuestions}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="questionTitle">
+      <mat-header-cell *matHeaderCellDef>questionTitle</mat-header-cell>
+      <mat-cell *matCellDef="let question"> {{question?.questionTitle}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="scoreByQuestion">
+      <mat-header-cell *matHeaderCellDef>Score by question</mat-header-cell>
+      <mat-cell *matCellDef="let question"> {{question?.scoreByQuestion}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="timer">
+      <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
+      <mat-cell *matCellDef="let question"> {{question?.timer}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="technology.nameTechnology">
+      <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
+      <mat-cell *matCellDef="let question"> {{question?.technology.nameTechnology}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="questionToEdit">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let question">
+        <button mat-raised-button color="accent" (click)="editQuestion(question?.idQuestions)">Edit</button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="questionToDelete">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let question">
+        <button mat-raised-button color="primary" class="buttonRefuse"
+          (click)="deleteQuestion(question.idQuestions); getQuestionList()">Delete</button>
+
+
+
+
+        <!-- //<a mat-raised-button color="warn" href="no-access">Delete</a> -->
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+</div>

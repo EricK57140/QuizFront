@@ -1,0 +1,43 @@
+*{
+  margin-left: 2%;
+
+}
+
+.page {
+  display: flex;
+ flex-direction: column;
+justify-items: auto;
+  justify-content: space-around;
+}
+#fieldQuestion{
+
+width:70%;
+}
+#answersTable{
+
+ width: 35%;
+}
+
+
+#pagepart2{
+
+display: flex;
+
+}
+.demo-table {
+  width: 100%;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}

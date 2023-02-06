@@ -1,0 +1,70 @@
+<app-hr-associate-top-banner></app-hr-associate-top-banner>
+<div class="col2">
+
+  <h1>Modify question "{{question?.questionTitle}}"</h1>
+  <div class="page">
+
+    <form [formGroup]="formControl" (submit)="saveQuestion()">
+      <input matInput [value]="question?.idQuestions" formControlName="idQuestions" [readonly]="true" matInput />
+
+      <p>
+        <mat-form-field class="example-form" appearance="fill">
+          <mat-label>{{question?.technology.nameTechnology}}</mat-label>
+
+          <mat-select formControlName="idTechnology" (selectionChange)="technologySelected()"
+            [(value)]="question?.technology.idTechnology">
+
+
+            <mat-option *ngFor="let technology of listTechnologies"
+              [value]="technology?.idTechnology">{{technology?.nameTechnology}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-form" appearance="fill" class="question">
+          <mat-label>Question</mat-label>
+          <input type="text" placeholder="questionTitle" formControlName="questionTitle" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="example-form" appearance="fill">
+          <mat-label>Score</mat-label>
+          <input value="{{question?.scoreByQuestion}}" type="text" placeholder="scoreByQuestion"
+            formControlName="scoreByQuestion" matInput />
+          <mat-error *ngIf="formControl.get('scoreByQuestion')?.hasError('pattern')">
+            Only number are allowed!
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-form" appearance="fill">
+          <mat-label>Timer</mat-label>
+          <input value="{{question?.timer}}" type="text" placeholder="timer" formControlName="timer" matInput />
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-table [dataSource]="listAnswers" class="mat-elevation-z8">
+          <ng-container matColumnDef="answerWording">
+            <mat-header-cell *matHeaderCellDef>ID question </mat-header-cell>
+
+            <input *matCellDef="let listAnswers" value="{{listAnswers?.answerWording}}" placeholder="timer"
+              formControlName="listAnswers.answerWording" matInput>
+
+
+
+          </ng-container>
+          <ng-container matColumnDef="correct">
+            <mat-header-cell *matHeaderCellDef>questionTitle</mat-header-cell>
+            <mat-cell *matCellDef="let listAnswers"> {{listAnswers.correct}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+
+
+
+
+      </p>
+      <p>
+        <button class=" example-form" mat-raised-button color="primary" type="submit">Save</button>
+      </p>
+    </form>
+  </div>
+</div>

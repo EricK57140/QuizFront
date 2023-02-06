@@ -1,0 +1,32 @@
+
+
+<div id="banner-connexion">
+    <h1>QUIZ</h1>
+</div>
+<div id="zone-connexion">
+    <form [formGroup]="formControl" class="d-flex flex-column" (submit)="onConnexion()">
+        <mat-form-field appearance="fill">
+            <mat-label>Login</mat-label>
+            <input formControlName="email" matInput/>
+            <mat-error *ngIf="formControl.get('email')?.hasError('required')">
+                Email est <strong>obligatoire</strong>
+            </mat-error>
+            <mat-error *ngIf="formControl.get('email')?.hasError('email')">
+                Email est <strong>mal formé</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Mot de passe</mat-label>
+            <input type="password" formControlName="password" matInput />
+            <mat-error *ngIf="formControl.get('password')?.hasError('required')">
+                Mot de passe est <strong>obligatoire</strong>
+            </mat-error>
+
+
+
+        </mat-form-field>
+
+        <button id="button1" mat-raised-button type="submit">log in</button>
+    </form>
+</div>

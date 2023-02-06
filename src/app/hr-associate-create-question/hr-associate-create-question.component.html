@@ -1,0 +1,43 @@
+<app-hr-associate-top-banner></app-hr-associate-top-banner>
+<div class="col2">
+
+  <h1>{{"Create new question" |translate}}</h1>
+  <div class="page">
+
+    <form [formGroup]="formControl" (submit)="saveQuestion()">
+      <p>
+        <mat-form-field class="example-form" appearance="fill">
+          <mat-label>{{'Click to choose technology' |translate}}</mat-label>
+          <mat-select formControlName="idTechnology" (selectionChange)="technologySelected()"
+            placeholder='{{"Choose a technology" |translate}}' [(value)]="selectedTechnology">
+            <mat-option *ngFor="let technology of listTechnologies"
+              value={{technology?.idTechnology}}>{{technology?.nameTechnology}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-form" appearance="fill" class="question">
+          <mat-label>{{"Question" |translate}}' </mat-label>
+          <input type="text" placeholder='{{"question title"|translate}}' formControlName="questionTitle" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="example-form" appearance="fill">
+          <mat-label>{{"Score" |translate}}</mat-label>
+          <input type="text" placeholder="{{'scorebyQuestion' |translate}}" formControlName="scoreByQuestion"
+            matInput />
+          <mat-error *ngIf="formControl.get('scoreByQuestion')?.hasError('pattern')">
+            {{'Only number are allowed!' |translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-form" appearance="fill">
+          <mat-label>{{'Timer' |translate}}</mat-label>
+          <input type="text" placeholder="{{'Timer' |translate}}" formControlName="timer" matInput />
+        </mat-form-field>
+      </p>
+
+      <p>
+        <button class=" example-form" mat-raised-button color="primary" type="submit">{{'Save question'
+          |translate}}</button>
+      </p>
+    </form>
+
+  </div>
+</div>
