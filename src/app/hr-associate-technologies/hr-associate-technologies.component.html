@@ -20,7 +20,7 @@
         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
         <mat-cell *matCellDef="let technology">
           <button mat-raised-button color="primary" class="buttonRefuse"
-            (click)="deleTetechnology(technology.idTechnology); getTechnologyList()">Delete</button>
+            (click)="deleTetechnology(technology.idTechnology); ">Delete</button>
         </mat-cell>
       </ng-container>
 
@@ -31,7 +31,7 @@
   <div id="pageleft">
 
     <h1>New technology</h1>
-    <form [formGroup]="formControl" (submit)="getTechnologyList();saveTechnology();">
+    <form [formGroup]="formControl" (submit)="saveTechnology();">
 
       <mat-form-field class="example-form" appearance="fill">
         <mat-label>Name of technology</mat-label>

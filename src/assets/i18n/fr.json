@@ -1,5 +1,5 @@
 {
-
+  "QUIZ APP":"yoyyooy",
   "Create new question":"Créer une nouvelle question",
 
   "Welcome":"Bienvenue",
@@ -15,7 +15,12 @@
   "Score" :"Score",
   "Only number are allowed!":"Uniquement des chiffres",
   "Timer":"Durée",
-  "Save question":"Enregistrer"
+  "Save question":"Enregistrer",
+
+  "Are you sure to remove this question?":"Etes-vous sûr de retirer cette question?"
+
+
+
 
 
 

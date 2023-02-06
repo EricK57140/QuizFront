@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { TokenidentificationService } from '../token-identification.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class HrAssociateCreateTestComponent {
   idTest: any;
   test: any;
   public listQuestions: any = [];
+  public listQuestionsByTest: any = [];
   displayedColumns: string[] = [
     //'idQuestions',
     'questionTitle',
@@ -28,7 +30,8 @@ export class HrAssociateCreateTestComponent {
     private tokenIdentification: TokenidentificationService,
     private client: HttpClient,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public translate: TranslateService
   ) {}
 
   public formControl: FormGroup = this.formBuilder.group({
@@ -65,16 +68,71 @@ export class HrAssociateCreateTestComponent {
     });
   }
   getQuestionList() {
-    this.client
-      .get('http://localhost:8080/hr/list-questions')
-      .subscribe((reponse) => (this.listQuestions = reponse));
+    this.route.params.subscribe((parameters: any) => {
+      this.idTest = parameters.id;
+      this.client
+        .get('http://localhost:8080/hr/list-questions-test/' + this.idTest)
+        .subscribe((reponse) => (this.listQuestions = reponse));
+    });
   }
 
-  addQuestion(id: number) {
-    console.log('toto' + id);
+  getQuestionListByTest() {
+    this.route.params.subscribe((parameters: any) => {
+      this.idTest = parameters.id;
+      this.client
+        .get('http://localhost:8080/hr/list-questions-by-test/' + this.idTest)
+        .subscribe((reponse) => (this.listQuestionsByTest = reponse));
+    });
+  }
+
+  addQuestion(idQuestion: number) {
+    this.route.params.subscribe((parameters: any) => {
+      this.idTest = parameters.id;
+      let params = new HttpParams();
+      params = params.append('testId', this.idTest);
+      params = params.append('questionId', idQuestion);
+
+      this.client
+        .post('http://localhost:8080/hr/add-question-to-test/', null, {
+          params: params,
+        })
+        .subscribe((response) => {
+          this.getQuestionList();
+          this.getQuestionListByTest();
+        });
+    });
+  }
+
+  deleteQuestion(idQuestion: number) {
+    this.translate
+      .get('Are you sure to remove this question?')
+      .subscribe((message: string) => {
+        if (confirm(message)) {
+          this.route.params.subscribe((parameters: any) => {
+            this.idTest = parameters.id;
+            let params = new HttpParams();
+            params = params.append('testId', this.idTest);
+            params = params.append('questionId', idQuestion);
+
+            this.client
+              .post(
+                'http://localhost:8080/hr/delete-question-from-test/',
+                null,
+                {
+                  params: params,
+                }
+              )
+              .subscribe((response) => {
+                this.getQuestionList();
+                this.getQuestionListByTest();
+              });
+          });
+        }
+      });
   }
   ngOnInit(): void {
     this.getTest();
     this.getQuestionList();
+    this.getQuestionListByTest();
   }
 }

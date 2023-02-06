@@ -10,6 +10,7 @@ import {
 import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { CommonService } from '../common.service';
 
 @Component({
   selector: 'app-hr-associate-create-question',
@@ -29,7 +30,8 @@ export class HrAssociateCreateQuestionComponent {
     private route: ActivatedRoute,
     private client: HttpClient,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private commonService: CommonService
   ) {}
 
   public formControl: FormGroup = this.formBuilder.group({
@@ -48,9 +50,9 @@ export class HrAssociateCreateQuestionComponent {
   });
 
   ngOnInit(): void {
-    this.client
-      .get('http://localhost:8080/hr/list-technology')
-      .subscribe((reponse) => (this.listTechnologies = reponse));
+    this.commonService
+      .getTechnologyList()
+      .subscribe((response) => (this.listTechnologies = response));
   }
 
   technologySelected() {

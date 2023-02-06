@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TokenidentificationService } from '../token-identification.service';
+import { CommonService } from '../common.service';
 
 @Component({
   selector: 'app-hr-associate-technologies',
@@ -28,27 +29,19 @@ export class HrAssociateTechnologiesComponent {
     private tokenIdentification: TokenidentificationService,
     private client: HttpClient,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private commonService: CommonService
   ) {}
 
   public formControl: FormGroup = this.formBuilder.group({
     nameTechnology: ['', [Validators.required]],
   });
 
-  getTechnologyList() {
-    this.client
-      .get('http://localhost:8080/hr/list-technology')
-      .subscribe((reponse) => (this.listTechnologies = reponse));
-    this.user = this.tokenIdentification.user.value.rights.includes('HR');
-    this.tokenIdentification.user.subscribe((user) => {
-      if (user != null) {
-        this.email = user.sub;
-      } else {
-        this.email = '';
-      }
-    });
+  getTechList() {
+    this.commonService
+      .getTechnologyList()
+      .subscribe((response) => (this.listTechnologies = response));
   }
-
   deleTetechnology(idTechnology: number) {
     if (confirm('Are you sure to delete ')) {
       if (
@@ -60,6 +53,7 @@ export class HrAssociateTechnologiesComponent {
           .subscribe()
       ) {
         alert('Technology succesfully deleted');
+        this.getTechList();
       }
     }
   }
@@ -73,6 +67,7 @@ export class HrAssociateTechnologiesComponent {
         .subscribe(
           (response) => {
             alert('Technology saved'), Error;
+            this.getTechList();
           },
           (error) => {
             if (error.status === 404) {
@@ -80,8 +75,6 @@ export class HrAssociateTechnologiesComponent {
             }
           }
         );
-
-      this.getTechnologyList();
     }
   }
 
@@ -105,6 +98,6 @@ export class HrAssociateTechnologiesComponent {
   }
 
   ngOnInit() {
-    this.getTechnologyList();
+    this.getTechList();
   }
 }

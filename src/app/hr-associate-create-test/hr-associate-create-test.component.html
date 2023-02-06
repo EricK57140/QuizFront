@@ -13,43 +13,74 @@
   </form>
 </div>
 
+<div id="tables">
+  <div class="answersTable">
 
-<div id="answersTable">
+    <table mat-table [dataSource]="listQuestions" class="mat-elevation-z8 demo-table">
+      <ng-container matColumnDef="idQuestions">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let question">{{question?.idQuestions}}</td>
+      </ng-container>
 
-  <table mat-table [dataSource]="listQuestions" class="mat-elevation-z8 demo-table">
-    <!-- Position Column -->
-    <ng-container matColumnDef="idQuestions">
-      <th mat-header-cell *matHeaderCellDef>Id</th>
-      <td mat-cell *matCellDef="let question">{{question?.idQuestions}}</td>
-    </ng-container>
+      <ng-container matColumnDef="questionTitle">
+        <th mat-header-cell *matHeaderCellDef>Question title</th>
+        <td mat-cell *matCellDef="let question">{{question?.questionTitle}}</td>
+      </ng-container>
+      <ng-container matColumnDef="scoreByQuestion">
+        <th mat-header-cell *matHeaderCellDef>Score</th>
+        <td mat-cell *matCellDef="let question">{{question?.scoreByQuestion}}</td>
+      </ng-container>
+      <ng-container matColumnDef="timer">
+        <th mat-header-cell *matHeaderCellDef>Time</th>
+        <td mat-cell *matCellDef="let question">{{question?.timer}}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="questionTitle">
-      <th mat-header-cell *matHeaderCellDef>Question title</th>
-      <td mat-cell *matCellDef="let question">{{question?.questionTitle}}</td>
-    </ng-container>
+      <ng-container matColumnDef="technology.nameTechnology">
+        <th mat-header-cell *matHeaderCellDef>Technology</th>
+        <td mat-cell *matCellDef="let question">{{question?.technology.nameTechnology}}</td>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="scoreByQuestion">
-      <th mat-header-cell *matHeaderCellDef>Score</th>
-      <td mat-cell *matCellDef="let question">{{question?.scoreByQuestion}}</td>
-    </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row (click)="addQuestion(question?.idQuestions)" *matRowDef="let question; columns: displayedColumns;">
+      </tr>
+    </table>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="timer">
-      <th mat-header-cell *matHeaderCellDef>Time</th>
-      <td mat-cell *matCellDef="let question">{{question?.timer}}</td>
-    </ng-container>
+  </div>
 
-    <ng-container matColumnDef="technology.nameTechnology">
-      <th mat-header-cell *matHeaderCellDef>Technology</th>
-      <td mat-cell *matCellDef="let question">{{question?.technology.nameTechnology}}</td>
-    </ng-container>
+  <div>cccccccccc</div>
+  <div>
+    <div id="answersTable">
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row (click)="addQuestion(question?.idQuestions)" *matRowDef="let question; columns: displayedColumns;"></tr>
-  </table>
+      <table mat-table [dataSource]="listQuestionsByTest" class="mat-elevation-z8 demo-table">
+        <ng-container matColumnDef="idQuestions">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let question">{{question?.idQuestions}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="questionTitle">
+          <th mat-header-cell *matHeaderCellDef>Question title</th>
+          <td mat-cell *matCellDef="let question">{{question?.questionTitle}}</td>
+        </ng-container>
+        <ng-container matColumnDef="scoreByQuestion">
+          <th mat-header-cell *matHeaderCellDef>Score</th>
+          <td mat-cell *matCellDef="let question">{{question?.scoreByQuestion}}</td>
+        </ng-container>
+        <ng-container matColumnDef="timer">
+          <th mat-header-cell *matHeaderCellDef>Time</th>
+          <td mat-cell *matCellDef="let question">{{question?.timer}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="technology.nameTechnology">
+          <th mat-header-cell *matHeaderCellDef>Technology</th>
+          <td mat-cell *matCellDef="let question">{{question?.technology.nameTechnology}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row (click)="deleteQuestion(question?.idQuestions)"
+          *matRowDef="let question; columns: displayedColumns;">
+        </tr>
+      </table>
 
 
-
-
-</div>
+    </div>
+  </div>
