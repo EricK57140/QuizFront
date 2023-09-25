@@ -12,10 +12,19 @@ justify-items: auto;
 #fieldQuestion{
 
 width:70%;}
+
 .answersTable{
 
- width: 35%;
+
+ min-width: 40%;
+ max-width: 40%;
 }
+.answersTable2{
+
+
+  min-width: 80%;
+  max-width: 80%;
+ }
 
 
 #pagepart2{

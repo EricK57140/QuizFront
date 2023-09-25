@@ -11,10 +11,35 @@
 
     <button class=" example-form" mat-raised-button color="primary" type="submit">Modify</button>
   </form>
+
 </div>
 
 <div id="tables">
   <div class="answersTable">
+    <form [formGroup]="formControlSearch" (keyup)=" getQuestionListBySearch()">
+      <mat-form-field appearance="fill">
+        <mat-label>{{"Search for a question title"|translate}}</mat-label>
+        <input matInput formControlName="search">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="clearValue()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+    <mat-form-field class="example-form" appearance="fill">
+      <mat-label>{{'Click to choose technology' |translate}}</mat-label>
+      <mat-select (selectionChange)="getQuestionListBySearch()" placeholder='{{"Choose a technology" |translate}}'
+        [(value)]="selectedTechnology">
+        <mat-option *ngFor="let technology of listTechnologies"
+          value={{technology?.idTechnology}}>{{technology?.nameTechnology}}</mat-option>
+        <mat-option value="0">--All--</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+
+
+
+
 
     <table mat-table [dataSource]="listQuestions" class="mat-elevation-z8 demo-table">
       <ng-container matColumnDef="idQuestions">
@@ -47,9 +72,9 @@
 
   </div>
 
-  <div>cccccccccc</div>
+  <div>COMPTEURS</div>
   <div>
-    <div id="answersTable">
+    <div class="answersTable2">
 
       <table mat-table [dataSource]="listQuestionsByTest" class="mat-elevation-z8 demo-table">
         <ng-container matColumnDef="idQuestions">

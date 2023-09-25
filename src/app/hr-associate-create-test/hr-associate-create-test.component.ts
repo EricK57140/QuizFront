@@ -16,6 +16,11 @@ export class HrAssociateCreateTestComponent {
   test: any;
   public listQuestions: any = [];
   public listQuestionsByTest: any = [];
+  public listTechnologies: any = [];
+  public selectedTechnology: String = '';
+  selectedIdTechnology: number = 0;
+  public idTechnology: number = 0;
+  value = '';
   displayedColumns: string[] = [
     //'idQuestions',
     'questionTitle',
@@ -37,6 +42,11 @@ export class HrAssociateCreateTestComponent {
   public formControl: FormGroup = this.formBuilder.group({
     idTest: ['', [Validators.required]],
     nameTest: ['', [Validators.required]],
+  });
+
+  public formControlSearch: FormGroup = this.formBuilder.group({
+    search: [''],
+    idTechnology: [''],
   });
 
   saveTest() {
@@ -76,6 +86,26 @@ export class HrAssociateCreateTestComponent {
     });
   }
 
+  getQuestionListBySearch() {
+    this.route.params.subscribe((parameters: any) => {
+      this.idTest = parameters.id;
+      this.selectedIdTechnology = Number(this.selectedTechnology);
+      console.log('id techno ' + this.selectedIdTechnology);
+      const searchBar = this.formControlSearch.value.search;
+      this.idTechnology = this.formControl.value.idTechnology;
+      let params = new HttpParams();
+      params = params.append('search', searchBar);
+      params = params.append('idTechno', this.selectedIdTechnology);
+
+      this.client
+        .get(
+          'http://localhost:8080/hr/questions-by-test-searchbar/' + this.idTest,
+          { params: params }
+        )
+        .subscribe((reponse) => (this.listQuestions = reponse));
+    });
+  }
+
   getQuestionListByTest() {
     this.route.params.subscribe((parameters: any) => {
       this.idTest = parameters.id;
@@ -84,7 +114,10 @@ export class HrAssociateCreateTestComponent {
         .subscribe((reponse) => (this.listQuestionsByTest = reponse));
     });
   }
-
+  clearValue() {
+    this.formControlSearch.get('search')?.setValue('');
+    this.getQuestionListBySearch();
+  }
   addQuestion(idQuestion: number) {
     this.route.params.subscribe((parameters: any) => {
       this.idTest = parameters.id;
@@ -130,9 +163,15 @@ export class HrAssociateCreateTestComponent {
         }
       });
   }
+
   ngOnInit(): void {
     this.getTest();
     this.getQuestionList();
     this.getQuestionListByTest();
+    this.client
+      .get('http://localhost:8080/hr/list-technology')
+      .subscribe((reponse) => {
+        this.listTechnologies = reponse;
+      });
   }
 }

@@ -38,6 +38,14 @@ import { HrAssociateTestComponent } from './hr-associate-test/hr-associate-test.
 import { HrAssociateCreateTestComponent } from './hr-associate-create-test/hr-associate-create-test.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HrAssociateTryTestComponent } from './hr-associate-try-test/hr-associate-try-test.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HrAssociateAssignTestComponent } from './hr-associate-assign-test/hr-associate-assign-test.component';
+import { DashboardCandidateComponent } from './dashboard-candidate/dashboard-candidate.component';
+import { CandidateTopBannerComponent } from './candidate-top-banner/candidate-top-banner.component';
+import { CandidatePassTestComponent } from './candidate-pass-test/candidate-pass-test.component';
+import { HrAssociateTestResultComponent } from './hr-associate-test-result/hr-associate-test-result.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +64,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     HrAssociateCreateAnswersComponent,
     HrAssociateTestComponent,
     HrAssociateCreateTestComponent,
+    HrAssociateTryTestComponent,
+    HrAssociateAssignTestComponent,
+    DashboardCandidateComponent,
+    CandidateTopBannerComponent,
+    CandidatePassTestComponent,
+    HrAssociateTestResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +89,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     MatSidenavModule,
     MatListModule,
     MatExpansionModule,
+    MatRadioModule,
+    MatSnackBarModule,
+
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

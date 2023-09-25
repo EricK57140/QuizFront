@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TokenidentificationService } from '../token-identification.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hr-associate-candidates-page',
@@ -14,10 +15,12 @@ export class HrAssociateCandidatesPageComponent {
   public personID: number = 0;
   public email: string = '';
   public user: any;
-
+  public formControlSearch: FormGroup = this.formBuilder.group({
+    search: [''],
+  });
   public hr: boolean = false;
   displayedColumns: string[] = [
-    'personID',
+    //'personID',
     'Firstname',
     'name',
     'email',
@@ -29,6 +32,7 @@ export class HrAssociateCandidatesPageComponent {
   constructor(
     private tokenIdentification: TokenidentificationService,
     private client: HttpClient,
+    private formBuilder: FormBuilder,
     private router: Router
   ) {}
 
@@ -38,7 +42,7 @@ export class HrAssociateCandidatesPageComponent {
 
   getCandidateList() {
     this.client
-      .get('http://localhost:8080/hr/list-person')
+      .get(environment.apiBaseUrl + 'hr/list-candidate')
       .subscribe((reponse) => (this.listPerson = reponse));
     this.user = this.tokenIdentification.user.value.rights.includes('HR');
     this.tokenIdentification.user.subscribe((user) => {
@@ -71,5 +75,24 @@ export class HrAssociateCandidatesPageComponent {
 
   editCandidate(personID: number) {
     this.router.navigateByUrl('hr-associate-edit-candidate/' + personID);
+  }
+  assignTestToCandidate(personID: number) {
+    this.router.navigateByUrl('hr-associate-assign-test/' + personID);
+  }
+  getCandidateListBySearch() {
+    const searchBar = this.formControlSearch.value.search;
+
+    let params = new HttpParams();
+    params = params.append('search', searchBar);
+
+    this.client
+      .get('http://localhost:8080/hr/candidates-by-searchbar/', {
+        params: params,
+      })
+      .subscribe((reponse) => (this.listPerson = reponse));
+  }
+  clearValue() {
+    this.formControlSearch.get('search')?.setValue('');
+    this.getCandidateList();
   }
 }

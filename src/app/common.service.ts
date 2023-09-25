@@ -14,4 +14,16 @@ export class CommonService {
       .get('http://localhost:8080/hr/list-technology')
       .pipe(map((response) => response));
   }
+
+  getTestsList() {
+    return this.client
+      .get('http://localhost:8080/hr/list-test')
+      .pipe(map((reponse) => reponse));
+  }
+
+  getListOfQuestions() {
+    return this.client
+      .get('http://localhost:8080/hr/list-questions')
+      .pipe(map((reponse) => reponse));
+  }
 }

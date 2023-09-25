@@ -1,0 +1,129 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-quizz-step-by-step',
+  template: `
+    <ng-container *ngIf="questions.length">
+      <div *ngIf="currentQuestion">
+        <h3>{{ currentQuestion.text }}</h3>
+        <div class="form-check" *ngFor="let answer of currentQuestion.answers">
+          <input class="form-check-input" type="radio" name="{{ currentQuestion.id }}" [value]="answer.value" (change)="onAnswerSelected(answer)">
+          <label class="form-check-label">{{ answer.text }}</label>
+        </div>
+        <button class="btn btn-primary mt-3" (click)="goToNextQuestion()" [disabled]="!selectedAnswer">Suivant</button>
+      </div>
+      <div *ngIf="!currentQuestion">
+        <h3>Résultats</h3>
+        <ul>
+          <li *ngFor="let answer of selectedAnswers">{{ answer.text }}</li>
+        </ul>
+      </div>
+    </ng-container>
+  `,
+  styles: [`
+    h3 {
+      margin-top: 1.5rem;
+    }
+  `]
+})
+export class QuizzStepByStepComponent implements OnInit {
+
+  questions = [    {      id: 1,      text: 'Quel est votre couleur préférée ?',      answers: [        { text: 'Rouge', value: 'red' },        { text: 'Vert', value: 'green' },        { text: 'Bleu', value: 'blue' }      ]
+    },
+    {
+      id: 2,
+      text: 'Quel est votre animal préféré ?',
+      answers: [
+        { text: 'Chat', value: 'cat' },
+        { text: 'Chien', value: 'dog' },
+        { text: 'Oiseau', value: 'bird' }
+      ]
+    },
+    {
+      id: 3,
+      text: 'Quel est votre plat préféré ?',
+      answers: [
+        { text: 'Pizza', value: 'pizza' },
+        { text: 'Sushi', value: 'sushi' },
+        { text: 'Steak', value: 'steak' }
+      ]
+    }
+  ];
+
+  currentQuestion: any;
+  selectedAnswer: any;
+  selectedAnswers: any[] = [];
+
+  constructor() { }
+
+  ngOnInit() {
+    this.goToNextQuestion();
+  }
+
+  onAnswerSelected(answer) {
+    this.selectedAnswer = answer;
+  }
+
+  goToNextQuestion() {
+    if (this.questions.length) {
+      this.selectedAnswers.push(this.selectedAnswer);
+      this.selectedAnswer = undefined;
+      this.currentQuestion = this.questions.shift();
+    } else
+    else {
+      this.currentQuestion = undefined;
+    }
+  }
+
+}
+
+
+
+
+mat card
+
+
+<div *ngFor="let item of items">
+  <mat-card>
+    <mat-card-title>{{ item.title }}</mat-card-title>
+    <mat-card-content>{{ item.content }}</mat-card-content>
+  </mat-card>
+</div>
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+  private apiUrl = 'http://api.example.com/items';
+
+  constructor(private http: HttpClient) { }
+
+  getItems(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
+  }
+}
+
+import { Component, OnInit } from '@angular/core';
+import { DataService } from './data.service';
+
+@Component({
+  selector: 'app-card-list',
+  templateUrl: './card-list.component.html',
+  styleUrls: ['./card-list.component.css']
+})
+export class CardListComponent implements OnInit {
+  items: any[];
+
+  constructor(private dataService: DataService) { }
+
+  ngOnInit() {
+    this.dataService.getItems()
+      .subscribe(data => {
+        this.items = data;
+      });
+  }
+}

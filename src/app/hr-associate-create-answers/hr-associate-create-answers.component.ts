@@ -45,6 +45,7 @@ export class HrAssociateCreateAnswersComponent {
   public formControlAnswer: FormGroup = this.formBuilder.group({
     idAnswers: ['', [Validators.required]],
     answerWording: ['', [Validators.required]],
+    score: ['', [Validators.required]],
     correct: ['', [Validators.required]],
   });
 
@@ -136,6 +137,7 @@ export class HrAssociateCreateAnswersComponent {
   saveAnswer() {
     this.route.params.subscribe((parameters: any) => {
       this.questionID = parameters.id;
+
       const answerToSend = this.formControlAnswer.value;
 
       let params2 = new HttpParams();

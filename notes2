@@ -1,0 +1,155 @@
+
+<ng-container *ngIf="testReport">
+  <div *ngFor="let question of testReport" class="question-card">
+    <mat-card>
+      <mat-card-title>{{ question.question }}</mat-card-title>
+      <mat-card-content>
+        <div *ngFor="let answer of question.answers" [ngClass]="{ 'correct-answer': answer.isCorrect, 'incorrect-answer': !answer.isCorrect && question.selectedAnswerId === answer.id }">
+          {{ answer.text }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-container>
+
+interface TestReport {
+  id: number;
+  question: string;
+  answers: Answer[];
+  selectedAnswerId: number | null;
+}
+
+interface Answer {
+  id: number;
+  text: string;
+  isCorrect: boolean;
+}
+
+ngOnInit() {
+  const testAssignationId = 1; // Replace with the ID of the test assignation
+  this.http.get<TestReport[]>(`/api/test-report/${testAssignationId}`)
+    .subscribe((testReport) => {
+      this.testReport = testReport;
+    });
+}
+
+}
+In the ngOnInit method, we get the test ID from the route and then call the getTestResults, getQuestions, and getAnswers methods to retrieve the necessary data from the server.
+
+The getSelectedAnswer method retrieves the selected answer for a given question ID, if one exists. We do this by searching the testResults array for an object that matches the current question ID, and then using the answerId property of that object to find the corresponding Answer object in the correctAnswers array.
+
+The isAnswerCorrect and isAnswerIncorrect methods check whether the selected answer for a given question ID is correct or incorrect, respectively. They use the getSelectedAnswer method to get the selected answer, and then check the isCorrect property of that answer.
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { QuestionService } from '../services/question.service';
+import { AnswerService } from '../services/answer.service';
+import { TestResultService } from '../services/test-result.service';
+import { Question } from '../models/question.model';
+import { Answer } from '../models/answer.model';
+import { TestResult } from '../models/test-result.model';
+
+@Component({
+  selector: 'app-test-report',
+  templateUrl: './test-report.component.html',
+  styleUrls: ['./test-report.component.css']
+})
+export class TestReportComponent implements OnInit {
+  testId: number;
+  questions: Question[];
+  testResults: TestResult[];
+  selectedAnswers: Answer[] = [];
+  correctAnswers: Answer[] = [];
+
+  constructor(
+    private route: ActivatedRoute,
+    private questionService: QuestionService,
+    private answerService: AnswerService,
+    private testResultService: TestResultService
+  ) {}
+
+  ngOnInit() {
+    this.testId = +this.route.snapshot.paramMap.get('id');
+    this.getTestResults();
+    this.getQuestions();
+    this.getAnswers();
+  }
+
+  getTestResults() {
+    this.testResultService.getTestResultsByTestId(this.testId).subscribe(testResults => {
+      this.testResults = testResults;
+    });
+  }
+
+  getQuestions() {
+    this.questionService.getQuestions().subscribe(questions => {
+      this.questions = questions;
+    });
+  }
+
+  getAnswers() {
+    this.answerService.getAnswers().subscribe(answers => {
+      this.correctAnswers = answers.filter(answer => answer.isCorrect);
+    });
+  }
+
+  getSelectedAnswer(questionId: number) {
+    const testResult = this.testResults.find(result => result.questionId === questionId);
+    if (testResult) {
+      return this.correctAnswers.find(answer => answer.id === testResult.answerId);
+    }
+    return null;
+  }
+
+  isAnswerCorrect(questionId: number) {
+    const selectedAnswer = this.getSelectedAnswer(questionId);
+    return selectedAnswer && selectedAnswer.isCorrect;
+  }
+
+  isAnswerIncorrect(questionId: number) {
+    const selectedAnswer = this.getSelectedAnswer(questionId);
+    return selectedAnswer && !selectedAnswer.isCorrect;
+  }
+}
+<div *ngFor="let question of questions">
+  <mat-card>
+    <mat-card-content>
+      <h2>{{ question.title }}</h2>
+      <ul>
+        <li *ngFor="let answer of question.answers">
+          <div [ngClass]="{
+              'selected-answer': answer.id === getSelectedAnswer(question.id)?.id,
+              'correct-answer': isAnswerCorrect(question.id),
+              'incorrect-answer': isAnswerIncorrect(question.id)
+            }">{{ answer.text }}</div>
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+In this template, we loop over the questions array and create a mat-card for each question. Inside each card, we loop over the answers array for that question and create a list item (li) for each answer. We use the getSelectedAnswer method to determine whether the current answer is the one that was selected by the candidate, and add the selected-answer class if it is. We use the isAnswerCorrect and isAnswerIncorrect methods to determine whether the current answer is correct or incorrect, and add the appropriate classes (correct-answer or incorrect-answer) to the answer text.
+
+Note that you'll need to define the CSS classes selected-answer, correct-answer, and incorrect-answer in your component's CSS file to style the answers appropriately.
+
+
+
+<div *ngFor="let question of listQuestions">
+
+  <mat-card>
+    <mat-card-content>
+      <p>{{question.idQuestions}}</p>
+
+      <h2>{{ question.questionTitle }}</h2>
+      <ul>
+
+        <li *ngFor="let answer of question.listAnswers" [ngStyle]="{'color': answer.correct ? 'green' :'red'}">
+         <div [ngClass]=" getAnswerClass()"></div> {{
+          answer.answerWording }}
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
+[ngClass]="getAnswerClass(answer)"
+          [ngStyle]="{'color': answer.correct ? 'green' :'red'}">
+          <span *ngIf="answer === testResults.answerWording" class="circled"></span>

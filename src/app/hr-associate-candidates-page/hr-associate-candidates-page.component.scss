@@ -1,20 +1,10 @@
 
 .demo-button{
-  margin-left: 2%;
+  margin-left: 0%;
 
  }
 
-.menu{
-  height: 10%;
-  width: 100%;
-  color: #FF6F02;
-  background-color: #151b36;
-}
 
-ul{
-  display: flex;
-  justify-items: space-between;
-}
 
 a:hover{
   cursor: pointer;
@@ -25,10 +15,16 @@ a:hover{
   width: 95%;
 }
 
+.demo-button-container{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+  margin-left: -30%;
+}
 
+.searchbar{
 
-img{
-  width: 200px;
+  width: 200%;
 }
 
 .mat-mdc-table {

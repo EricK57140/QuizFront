@@ -14,6 +14,12 @@ import { HrAssociateTechnologiesComponent } from './hr-associate-technologies/hr
 import { HrAssociateTestComponent } from './hr-associate-test/hr-associate-test.component';
 import { HrAssociateGuard } from './hr-associate.guard';
 import { NoAccessComponent } from './no-access/no-access.component';
+import { HrAssociateTryTestComponent } from './hr-associate-try-test/hr-associate-try-test.component';
+import { HrAssociateAssignTestComponent } from './hr-associate-assign-test/hr-associate-assign-test.component';
+import { DashboardCandidateComponent } from './dashboard-candidate/dashboard-candidate.component';
+import { CandidateGuard } from './candidate.guard';
+import { CandidatePassTestComponent } from './candidate-pass-test/candidate-pass-test.component';
+import { HrAssociateTestResultComponent } from './hr-associate-test-result/hr-associate-test-result.component';
 
 const routes: Routes = [
   { path: '', component: ConnexionPageComponent },
@@ -79,8 +85,33 @@ const routes: Routes = [
     component: HrAssociateCreateTestComponent,
     canActivate: [HrAssociateGuard],
   },
+  {
+    path: 'hr-associate-try-test/:id',
+    component: HrAssociateTryTestComponent,
+    canActivate: [HrAssociateGuard],
+  },
+  {
+    path: 'hr-associate-assign-test/:id',
+    component: HrAssociateAssignTestComponent,
+    canActivate: [HrAssociateGuard],
+  },
+  {
+    path: 'dashboard-candidate',
+    component: DashboardCandidateComponent,
+    canActivate: [CandidateGuard],
+    runGuardsAndResolvers: 'always',
+  },
+  {
+    path: 'candidate-pass-test/:id',
+    component: CandidatePassTestComponent,
+    canActivate: [CandidateGuard],
+  },
+  {
+    path: 'hr-associate-test-result/:id',
+    component: HrAssociateTestResultComponent,
+    canActivate: [HrAssociateGuard],
+  },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

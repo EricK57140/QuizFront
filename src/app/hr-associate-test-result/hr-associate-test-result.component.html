@@ -1,0 +1,53 @@
+<app-hr-associate-top-banner></app-hr-associate-top-banner>
+<div>
+  <p></p>
+</div>
+
+<p>The result of the test is {{score}} %</p>
+
+
+
+
+
+<div *ngFor="let question of listQuestions">
+
+  <mat-card>
+    <mat-card-content>
+
+
+      <h2>{{ question.questionTitle }}</h2>
+
+
+
+
+
+
+
+
+      <div *ngFor="let answer of question.listAnswers"
+        [ngStyle]="{'color': answer.correct ? 'green' :'red', 'font-weight': answer.correct  ? 'bold' : 'normal'}"
+        [ngClass]="{'selected-answer': isAnswerSelected(answer)}">
+
+
+
+
+        <!-- , 'font-weight': isAnswerSelected(answer) ? 'bold' : 'normal'}"> -->
+        <label>
+          <input type="radio" [disabled]="true" [checked]="isAnswerSelected(answer)">
+          {{ answer.answerWording }}
+        </label>
+      </div>
+
+      <!--
+      <ul>
+        <li *ngFor="let answer of question.listAnswers">
+          <label [ngStyle]="{'color': answer.correct ? 'green' :'red'}">
+            <input type="radio" name="answer" [value]="answer.idAnswers" [checked]="isAnswerSelected(answer)"
+              [disabled]="true">
+            {{ answer.answerWording }}
+          </label>
+        </li>
+      </ul> -->
+    </mat-card-content>
+  </mat-card>
+</div>

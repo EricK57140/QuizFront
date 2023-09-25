@@ -2,19 +2,31 @@
 <div>
   <p></p>
 </div>
+<div class="demo-button-container">
 
-<div>
-  <form [formGroup]="formControl" (submit)="saveTest()">
+  <div>
+    <form [formGroup]="formControl" (submit)="saveTest()">
 
-    <mat-form-field class="example-form" appearance="fill" class="question" id="fieldQuestion">
-      <mat-label>Name of the test</mat-label>
-      <input type="text" placeholder="Test" formControlName="nameTest" matInput />
-    </mat-form-field>
+      <mat-form-field class="example-form" appearance="fill" class="question" id="fieldQuestion">
+        <mat-label>Name of the test to create</mat-label>
+        <input type="text" placeholder="Test" formControlName="nameTest" matInput />
+      </mat-form-field>
 
-    <button class=" example-form" mat-raised-button color="primary" type="submit">Save</button>
-  </form>
+      <button class=" example-form" mat-raised-button color="primary" type="submit">Save</button>
+    </form>
+  </div>
+  <div>
+    <form [formGroup]="formControlSearch" (keyup)="getTestListBySearch()">
+      <mat-form-field appearance="fill" class="searchbar">
+        <mat-label>{{"Search for a test by name"|translate}}</mat-label>
+        <input matInput formControlName="search">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="clearValue()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+  </div>
 </div>
-
 <div id="list-questions">
 
   <mat-table [dataSource]="listTests" class="mat-elevation-z8">
@@ -35,11 +47,19 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="tryTest">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let test">
+        <button mat-raised-button color="warn" class="buttonRefuse" (click)="tryTest(test?.idTest);">Try</button>
+
+      </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="testToDelete">
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
       <mat-cell *matCellDef="let test">
         <button mat-raised-button color="warn" class="buttonRefuse"
-          (click)="deleteTest(test?.idTest); getTestsList()">Delete</button>
+          (click)="deleteTest(test?.idTest); getTestsListPage()">Delete</button>
 
       </mat-cell>
     </ng-container>

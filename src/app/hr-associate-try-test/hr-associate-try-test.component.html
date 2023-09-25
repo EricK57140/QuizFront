@@ -1,0 +1,22 @@
+<app-hr-associate-top-banner></app-hr-associate-top-banner>
+<div>
+  <p></p>
+</div>
+
+
+<mat-card *ngIf="currentQuestion">
+  <mat-card-title>{{currentQuestion?.questionTitle}}</mat-card-title>
+  <mat-card-content>
+    <mat-radio-group [(ngModel)]="selectedAnswer">
+      <mat-radio-button *ngFor="let answer of listAnswers" [value]="answer">
+        {{answer.answerWording}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+  </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="!currentQuestion">
+  <h3>Le quizz est terminé!</h3>
+</mat-card>

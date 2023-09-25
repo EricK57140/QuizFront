@@ -1,8 +1,5 @@
 
-.demo-button{
-  margin-left: 2%;
 
- }
 
 .menu{
   height: 10%;
@@ -51,6 +48,18 @@ img{
 }
 
 #fieldQuestion{
-margin-left: 5%;
-  width:50%;
+
+  width:80%;
+  }
+  .searchbar{
+
+    width: 200%;
+  }
+
+  .demo-button-container{
+    display: flex;
+    justify-content: space-evenly;
+   // align-items: baseline;
+   margin-left: -30%;
+
   }

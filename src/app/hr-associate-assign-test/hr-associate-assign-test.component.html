@@ -1,0 +1,68 @@
+<app-hr-associate-top-banner></app-hr-associate-top-banner>
+<div>
+  <p></p>
+</div>
+
+<div>
+  <h1>{{"The candidate seclected is" |translate}} {{user?.firstName}} {{user?.name}} </h1>
+</div>
+
+<div>
+  <div id="tables">
+    <table mat-table [dataSource]="listTestsAssigned" class="mat-elevation-z8 demo-table">
+      <ng-container matColumnDef="IdTestAssigned">
+        <th mat-header-cell *matHeaderCellDef>Id Test</th>
+        <td mat-cell *matCellDef="let test">{{test?.idTestAssignation}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>Test Assigned</th>
+        <td mat-cell *matCellDef="let test">{{test?.test.nameTest}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="AssignationDate">
+        <th mat-header-cell *matHeaderCellDef>Date of assignation</th>
+        <td mat-cell *matCellDef="let test">{{test?.assignationDate}}</td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsTestsAssigned"></tr>
+      <tr mat-row (click)="goToPageResult(test?.test.idTest)"
+        *matRowDef="let test; columns: displayedColumnsTestsAssigned;">
+      </tr>
+    </table>
+  </div>
+  <div>
+    <p></p>
+  </div>
+  <div>
+    <h2> List of Test Available</h2>
+    <form [formGroup]="formControlSearch" (keyup)=" getTestListBySearch()">
+      <mat-form-field appearance="fill">
+        <mat-label>{{"Search for a test"|translate}}</mat-label>
+        <input matInput formControlName="search">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="clearValue()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+    <div id="tables">
+      <table mat-table [dataSource]="listTests" class="mat-elevation-z8 demo-table" id="tables">
+        <ng-container matColumnDef="idtest">
+          <th mat-header-cell *matHeaderCellDef>Id Test</th>
+          <td mat-cell *matCellDef="let test">{{test?.idTest}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef>Test Name</th>
+          <td mat-cell *matCellDef="let test">{{test?.nameTest}}</td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row (click)="addTest(test?.idTest)" *matRowDef="let test; columns: displayedColumns;">
+        </tr>
+      </table>
+    </div>
+  </div>

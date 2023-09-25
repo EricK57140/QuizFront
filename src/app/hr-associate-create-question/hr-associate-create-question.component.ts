@@ -37,10 +37,10 @@ export class HrAssociateCreateQuestionComponent {
   public formControl: FormGroup = this.formBuilder.group({
     idTechnology: ['', [Validators.required]],
     questionTitle: ['', [Validators.required]],
-    scoreByQuestion: [
-      '',
-      [Validators.pattern('^[0-9]*$'), Validators.required],
-    ],
+    // scoreByQuestion: [
+    //   '',
+    //   [Validators.pattern('^[0-9]*$'), Validators.required],
+    // ],
     timer: ['', [Validators.pattern('^[0-9]*$'), Validators.required]],
   });
   public formControlAnswer: FormGroup = this.formBuilder.group({
@@ -63,7 +63,7 @@ export class HrAssociateCreateQuestionComponent {
   saveQuestion() {
     const questions = {
       questionTitle: this.formControl.get('questionTitle')?.value,
-      scoreByQuestion: this.formControl.get('scoreByQuestion')?.value,
+      // scoreByQuestion: this.formControl.get('scoreByQuestion')?.value,
       timer: this.formControl.get('timer')?.value,
     };
 

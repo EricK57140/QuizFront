@@ -3,15 +3,30 @@
   <p></p>
 </div>
 <div class="demo-button-container">
-  <a mat-raised-button color="red" href="hr-associate-create-question" class="demo-button">
-    Create Questions
-  </a>
-  <a mat-raised-button color="red" href="hr-associate-technologies" class="demo-button">
-    Technologies
-  </a>
+  <div>
+    <a mat-raised-button color="red" href="hr-associate-create-question" class="demo-button">
+      Create Questions
+    </a>
+    <a mat-raised-button color="red" href="hr-associate-technologies" class="demo-button">
+      Technologies
+    </a>
+  </div>
+  <div>
+    <form [formGroup]="formControlSearch" (keyup)="getQuestionsBySearch()">
+      <mat-form-field appearance="fill" class="searchbar">
+        <mat-label>{{"Search for a question"|translate}}</mat-label>
+        <input matInput formControlName="search">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="clearValue()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+  </div>
 </div>
 
-
+<div>
+  <p></p>
+</div>
 <div id="list-questions">
 
   <mat-table [dataSource]="listQuestions" class="mat-elevation-z8">
@@ -22,10 +37,6 @@
     <ng-container matColumnDef="questionTitle">
       <mat-header-cell *matHeaderCellDef>questionTitle</mat-header-cell>
       <mat-cell *matCellDef="let question"> {{question?.questionTitle}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="scoreByQuestion">
-      <mat-header-cell *matHeaderCellDef>Score by question</mat-header-cell>
-      <mat-cell *matCellDef="let question"> {{question?.scoreByQuestion}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="timer">
       <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
@@ -49,10 +60,6 @@
         <button mat-raised-button color="primary" class="buttonRefuse"
           (click)="deleteQuestion(question.idQuestions); getQuestionList()">Delete</button>
 
-
-
-
-        <!-- //<a mat-raised-button color="warn" href="no-access">Delete</a> -->
       </mat-cell>
     </ng-container>
 

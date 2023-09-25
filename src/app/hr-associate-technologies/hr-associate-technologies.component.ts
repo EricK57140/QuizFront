@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TokenidentificationService } from '../token-identification.service';
 import { CommonService } from '../common.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hr-associate-technologies',
@@ -30,7 +32,8 @@ export class HrAssociateTechnologiesComponent {
     private client: HttpClient,
     private router: Router,
     private formBuilder: FormBuilder,
-    private commonService: CommonService
+    private commonService: CommonService,
+    public translate: TranslateService
   ) {}
 
   public formControl: FormGroup = this.formBuilder.group({
@@ -82,7 +85,7 @@ export class HrAssociateTechnologiesComponent {
     const technology = this.formControl.value;
     this.nameTechnology = this.formControl.value.nameTechnology;
     this.client
-      .get('http://localhost:8080/hr/nameTechnologyCheck', {
+      .get(environment.apiBaseUrl + 'hr/nameTechnologyCheck', {
         params: { nameTechnology: this.nameTechnology },
       })
       .subscribe(

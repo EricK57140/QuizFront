@@ -1,0 +1,21 @@
+.menu{
+  height: 10%;
+  width: 100%;
+  color: #FF6F02;
+  background-color: #151b36;
+}
+
+ul{
+  display: flex;
+  justify-items: space-between;
+}
+
+a:hover{
+  cursor: pointer;
+}
+ul.nav > li {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: large;
+}
+

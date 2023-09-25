@@ -12,14 +12,14 @@
           <input type="text" placeholder="questionTitle" formControlName="questionTitle" matInput />
         </mat-form-field>
       </p>
-      <mat-form-field class="example-form" appearance="fill">
+      <!-- <mat-form-field class="example-form" appearance="fill">
         <mat-label>Score</mat-label>
         <input value="{{question?.scoreByQuestion}}" type="text" placeholder="scoreByQuestion"
           formControlName="scoreByQuestion" matInput />
         <mat-error *ngIf="formControl.get('scoreByQuestion')?.hasError('pattern')">
           Only number are allowed!
         </mat-error>
-      </mat-form-field>
+      </mat-form-field> -->
       <mat-form-field class="example-form" appearance="fill">
         <mat-label>Timer</mat-label>
         <input value="{{question?.timer}}" type="text" placeholder="timer" formControlName="timer" matInput />
@@ -93,6 +93,10 @@
             <input type="text" placeholder="answerWording" formControlName="answerWording" matInput />
           </mat-form-field>
         </p>
+        <p><mat-form-field class="example-form" appearance="fill" class="question" id="fieldQuestion">
+            <mat-label>Score</mat-label>
+            <input type="text" placeholder="score" formControlName="score" matInput />
+          </mat-form-field></p>
         <mat-form-field class="example-form" appearance="fill">
           <mat-label>Correct </mat-label>
           <mat-select formControlName="correct">

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormControl } from '@angular/forms';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TokenidentificationService } from '../token-identification.service';
+import { CommonService } from '../common.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hr-associate-questions',
@@ -14,12 +16,15 @@ export class HrAssociateQuestionsComponent {
   public personID: number = 0;
   public email: string = '';
   public user: any;
+  public formControlSearch: FormGroup = this.formBuilder.group({
+    search: [''],
+  });
 
   public hr: boolean = false;
   displayedColumns: string[] = [
-    'idQuestions',
+    // 'idQuestions',
     'questionTitle',
-    'scoreByQuestion',
+    //'scoreByQuestion',
     'timer',
     'technology.nameTechnology',
     'questionToEdit',
@@ -29,7 +34,9 @@ export class HrAssociateQuestionsComponent {
   constructor(
     private tokenIdentification: TokenidentificationService,
     private client: HttpClient,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private commonService: CommonService
   ) {}
 
   editQuestion(idQuestions: number) {
@@ -39,20 +46,27 @@ export class HrAssociateQuestionsComponent {
   deleteQuestion(idQuestions: number) {}
 
   getQuestionList() {
-    this.client
-      .get('http://localhost:8080/hr/list-questions')
+    this.commonService
+      .getListOfQuestions()
       .subscribe((reponse) => (this.listQuestions = reponse));
-    this.user = this.tokenIdentification.user.value.rights.includes('HR');
-    this.tokenIdentification.user.subscribe((user) => {
-      if (user != null) {
-        this.email = user.sub;
-      } else {
-        this.email = '';
-      }
-    });
   }
 
   ngOnInit(): void {
+    this.getQuestionList();
+  }
+  getQuestionsBySearch() {
+    const searchBar = this.formControlSearch.value.search;
+    let params = new HttpParams();
+    params = params.append('search', searchBar);
+
+    this.client
+      .get(environment.apiBaseUrl + 'hr/questions-by--searchbar/', {
+        params: params,
+      })
+      .subscribe((reponse) => (this.listQuestions = reponse));
+  }
+  clearValue() {
+    this.formControlSearch.get('search')?.setValue('');
     this.getQuestionList();
   }
 }

@@ -1,0 +1,67 @@
+.mat-card {
+  max-width: 400px;
+  margin-bottom: 8px;
+}
+*{
+  margin-left: 100px;
+}
+// .possible-answer {
+//   background-color: #ffffff;
+// }
+
+// .candidate-answer {
+//   background-color: #ff0000;
+// }
+
+// .correct-answer {
+//   background-color: #00ff00;
+// }
+
+// .selected-answer {
+//   width: 100px;
+//   height: 100px;
+//   line-height: 100px;
+//   text-align: center;
+//   border-radius: 50%;
+//   border: 2px solid black;
+// }
+
+// .circled {
+//   border: 2px solid black;
+//   border-radius: 50%;
+//   display: inline-block;
+//   height: 20px;
+//   line-height: 20px;
+//   margin-right: 5px;
+//   text-align: center;
+//   width: 20px;
+// }
+// .selected {
+//   font-weight: bold;
+// }
+
+// .circle {
+//   display: inline-block;
+//   width: 12px;
+//   height: 12px;
+//   border-radius: 50%;
+//   margin-right: 10px;
+//   background-color: #007bff;
+// }
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #333; /* outer circle */
+  border-radius: 50%;
+  outline: none;
+  box-shadow: none;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type="radio"]:checked {
+  background-color: #333; /* inner circle color when selected */
+}

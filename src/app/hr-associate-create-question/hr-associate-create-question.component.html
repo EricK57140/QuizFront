@@ -15,18 +15,18 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field class="example-form" appearance="fill" class="question">
-          <mat-label>{{"Question" |translate}}' </mat-label>
+          <mat-label>{{"Question" |translate}}</mat-label>
           <input type="text" placeholder='{{"question title"|translate}}' formControlName="questionTitle" matInput />
         </mat-form-field>
 
-        <mat-form-field class="example-form" appearance="fill">
+        <!-- <mat-form-field class="example-form" appearance="fill">
           <mat-label>{{"Score" |translate}}</mat-label>
           <input type="text" placeholder="{{'scorebyQuestion' |translate}}" formControlName="scoreByQuestion"
             matInput />
           <mat-error *ngIf="formControl.get('scoreByQuestion')?.hasError('pattern')">
             {{'Only number are allowed!' |translate}}
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
         <mat-form-field class="example-form" appearance="fill">
           <mat-label>{{'Timer' |translate}}</mat-label>
           <input type="text" placeholder="{{'Timer' |translate}}" formControlName="timer" matInput />

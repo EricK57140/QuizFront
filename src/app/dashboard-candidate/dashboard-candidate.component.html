@@ -1,0 +1,24 @@
+<app-candidate-top-banner></app-candidate-top-banner>
+
+<div id="list-test-assigned">
+  <mat-table [dataSource]="listTestsAssigned" class="mat-elevation-z8">
+    <ng-container matColumnDef="IdTestAssigned">
+      <mat-header-cell *matHeaderCellDef>Identifiant Utilisateur </mat-header-cell>
+      <mat-cell *matCellDef="let test"> {{test?.test.idTest}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef>Firstname</mat-header-cell>
+      <mat-cell *matCellDef="let test"> {{test?.test.nameTest}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="AssignationDate">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let test">
+        <button mat-raised-button color="accent" (click)="takeTest(test?.test.idTest)">Take test</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+</div>

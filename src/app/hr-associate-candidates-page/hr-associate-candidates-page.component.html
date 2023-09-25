@@ -4,10 +4,25 @@
   <p></p>
 </div>
 <div class="demo-button-container">
-  <button mat-raised-button color="red" (click)="onCreateCandidate()" class="demo-button">
-    Create Candidate
-  </button>
+  <div>
+    <button mat-raised-button color="red" (click)="onCreateCandidate()" class="demo-button">
+      Create Candidate
+    </button>
+  </div>
+  <div>
+    <form [formGroup]="formControlSearch" (keyup)=" getCandidateListBySearch()">
+      <mat-form-field appearance="fill" class="searchbar">
+        <mat-label>{{"Search for a candidate by nale or firstname"|translate}}</mat-label>
+        <input matInput formControlName="search">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="clearValue()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+  </div>
+
 </div>
+
 <div id="list-candidates">
   <mat-table [dataSource]="listPerson" class="mat-elevation-z8">
     <ng-container matColumnDef="personID">
@@ -35,7 +50,7 @@
     <ng-container matColumnDef="candidateTest">
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
       <mat-cell *matCellDef="let person">
-        <a mat-raised-button color="primary" href="no-access">Tests</a>
+        <button mat-raised-button color="primary" (click)="assignTestToCandidate(person?.personID)">Tests</button>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="candidateToDelete">
