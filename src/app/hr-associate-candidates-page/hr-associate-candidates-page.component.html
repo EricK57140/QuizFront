@@ -1,5 +1,4 @@
 <app-hr-associate-top-banner></app-hr-associate-top-banner>
-
 <div>
   <p></p>
 </div>
@@ -24,7 +23,7 @@
 </div>
 
 <div id="list-candidates">
-  <mat-table [dataSource]="listPerson" class="mat-elevation-z8">
+  <mat-table [dataSource]="listPerson" class="mat-elevation-z8" >
     <ng-container matColumnDef="personID">
       <mat-header-cell *matHeaderCellDef>Identifiant Utilisateur </mat-header-cell>
       <mat-cell *matCellDef="let person"> {{person?.personID}}</mat-cell>
@@ -53,11 +52,11 @@
         <button mat-raised-button color="primary" (click)="assignTestToCandidate(person?.personID)">Tests</button>
       </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="candidateToDelete">
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <ng-container matColumnDef="candidateToDelete" >
+      <mat-header-cell *matHeaderCellDef > </mat-header-cell>
       <mat-cell *matCellDef="let person">
-        <button mat-raised-button color="primary" class="buttonRefuse"
-          (click)="deleteCandidate(person.personID); getCandidateList()"> Supprimer </button>
+        <button mat-raised-button  class="buttonRefuse"
+          (click)="deleteCandidate(person.personID); getCandidateList()" style="border-color:black;border:solid;">    <span class="material-icons">delete_forever</span></button>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>

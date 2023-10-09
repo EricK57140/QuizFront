@@ -42,7 +42,7 @@ export class HrAssociateCandidatesPageComponent {
 
   getCandidateList() {
     this.client
-      .get(environment.apiBaseUrl + 'hr/list-candidate')
+      .get(environment.apiBaseUrl + 'hr/list-person')
       .subscribe((reponse) => (this.listPerson = reponse));
     this.user = this.tokenIdentification.user.value.rights.includes('HR');
     this.tokenIdentification.user.subscribe((user) => {

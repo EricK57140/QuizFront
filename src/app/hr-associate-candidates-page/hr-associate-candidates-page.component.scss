@@ -1,9 +1,7 @@
 
 .demo-button{
   margin-left: 0%;
-
  }
-
 
 
 a:hover{
@@ -11,8 +9,11 @@ a:hover{
 }
 
 #list-candidates{
-
-  width: 95%;
+  width: 80%;
+  margin-left: 5%;
+  margin: 0 auto;
+  padding: auto;
+  display: flex;
 }
 
 .demo-button-container{
@@ -30,12 +31,23 @@ a:hover{
 .mat-mdc-table {
 
   max-height: 500px;
-  overflow: auto;
+  overflow: hidden;
   margin-left: 2%;
+
 }
 
-.mat-column-name {
-  height: auto;
+
+.mat-column-email{
+
+  flex: 0 0 27%;
+}
+.mat-column-name{
+
+  flex: 0 0 25%;
+}
+.mat-column-Firstname{
+
+  flex: 0 0 25%;
 }
 
 .col2 {
@@ -43,3 +55,21 @@ a:hover{
 
 }
 
+.mat-column-candidateToDelete{
+  flex: 7% 2% 7%;
+}
+.mat-column-candidateTest{
+  flex: 7% 7% 7%;
+}
+.mat-column-candidateToEdit{
+  flex: 7% 7% 7%;
+}
+
+.mat-elevation-z8{
+
+  width: 50%;
+}
+
+.mat-row{
+  width: 60%;
+}
