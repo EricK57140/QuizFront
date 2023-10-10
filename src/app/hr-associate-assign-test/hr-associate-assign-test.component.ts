@@ -31,6 +31,7 @@ export class HrAssociateAssignTestComponent {
     // 'IdTestAssigned',
     'Name',
     'AssignationDate',
+    'action'
   ];
   constructor(
     private route: ActivatedRoute,
@@ -135,4 +136,8 @@ export class HrAssociateAssignTestComponent {
   public formControlSearch: FormGroup = this.formBuilder.group({
     search: [''],
   });
+
+  clitest(){
+    alert("jjjj")
+  }
 }

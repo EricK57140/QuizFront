@@ -46,6 +46,7 @@ import { DashboardCandidateComponent } from './dashboard-candidate/dashboard-can
 import { CandidateTopBannerComponent } from './candidate-top-banner/candidate-top-banner.component';
 import { CandidatePassTestComponent } from './candidate-pass-test/candidate-pass-test.component';
 import { HrAssociateTestResultComponent } from './hr-associate-test-result/hr-associate-test-result.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { HrAssociateTestResultComponent } from './hr-associate-test-result/hr-as
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatMenuModule,
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
