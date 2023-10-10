@@ -4,15 +4,15 @@
 </div>
 <div class="demo-button-container">
   <div>
-    <button mat-raised-button color="red" (click)="onCreateCandidate()" class="demo-button" style="border: solid;">
+    <button mat-raised-button color="red" (click)="onCreateCandidate()" class="demo-button" style="border: solid;background-color:white;">
       Create Candidate
     </button>
   </div>
-  <div>
-    <form [formGroup]="formControlSearch" (keyup)=" getCandidateListBySearch()">
-      <mat-form-field appearance="fill" class="searchbar">
+  <div >
+    <form [formGroup]="formControlSearch" (keyup)=" getCandidateListBySearch()"  >
+      <mat-form-field   class="searchbar" >
         <mat-label>{{"Search for a candidate by nale or firstname"|translate}}</mat-label>
-        <input matInput formControlName="search">
+        <input matInput formControlName="search" >
         <button matSuffix mat-icon-button aria-label="Clear" (click)="clearValue()">
           <mat-icon>close</mat-icon>
         </button>

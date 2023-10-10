@@ -3,7 +3,6 @@
   margin-left: 0%;
  }
 
-
 a:hover{
   cursor: pointer;
 }
@@ -21,41 +20,27 @@ a:hover{
   justify-content: space-evenly;
   align-items: baseline;
   margin-left: -20%;
-
 }
 
 .searchbar{
-
   width: 200%;
 }
 
 .mat-mdc-table {
-
   max-height: 500px;
   overflow: hidden;
-  margin-left: 1%;
-
+  margin-left: 1%
 }
 
-
 .mat-column-email{
-
   flex: 0 0 27%;
 }
 .mat-column-name{
-
   flex: 0 0 25%;
 }
 .mat-column-Firstname{
-
   flex: 0 0 25%;
 }
-
-.col2 {
-  display: flex;
-
-}
-
 .mat-column-candidateToDelete{
   flex: 7% 2% 7%;
 }
@@ -67,10 +52,15 @@ a:hover{
 }
 
 .mat-elevation-z8{
-
   width: 50%;
 }
 
 .mat-row{
   width: 60%;
+}
+
+.searchbar::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: 32px;
+  width: 500px;
+  border: solid;
 }
