@@ -11,6 +11,7 @@ import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonService } from '../common.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hr-associate-create-question',
@@ -77,7 +78,7 @@ export class HrAssociateCreateQuestionComponent {
 
     this.client
       .post(
-        'http://localhost:8080/hr/question/create',
+        environment.apiBaseUrl +'/hr/question/create',
         questions,
 
         { params: params }
@@ -120,7 +121,7 @@ export class HrAssociateCreateQuestionComponent {
 
       this.client
         .post(
-          'http://localhost:8080/hr/answer/create',
+          environment.apiBaseUrl +'/hr/answer/create',
           answer,
 
           { params: params2 }

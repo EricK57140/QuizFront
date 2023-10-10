@@ -64,7 +64,7 @@ export class HrAssociateCandidatesPageComponent {
     if (confirm('Are you sure to delete ')) {
       if (
         this.client
-          .post('http://localhost:8080/hr/person/disable/' + personID, null)
+          .post(environment.apiBaseUrl +'/hr/person/disable/' + personID, null)
           .subscribe()
       ) {
         this.user = null;
@@ -86,7 +86,7 @@ export class HrAssociateCandidatesPageComponent {
     params = params.append('search', searchBar);
 
     this.client
-      .get('http://localhost:8080/hr/candidates-by-searchbar/', {
+      .get(environment.apiBaseUrl + '/hr/candidates-by-searchbar/', {
         params: params,
       })
       .subscribe((reponse) => (this.listPerson = reponse));

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from '../common.service';
 import { TokenidentificationService } from '../token-identification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hr-associate-try-test',
@@ -34,7 +35,7 @@ export class HrAssociateTryTestComponent {
     this.route.params.subscribe((parameters: any) => {
       this.idTest = parameters.id;
       this.client
-        .get('http://localhost:8080/hr/list-questions-by-test/' + this.idTest)
+        .get(environment.apiBaseUrl +'/hr/list-questions-by-test/' + this.idTest)
         .subscribe((response) => {
           this.listQuestions = response;
           this.currentQuestion = this.listQuestions[0];
@@ -46,7 +47,7 @@ export class HrAssociateTryTestComponent {
 
   getAnswers(questionId: number) {
     this.client
-      .get('http://localhost:8080/hr/list-answers/' + questionId)
+      .get(environment.apiBaseUrl +'/hr/list-answers/' + questionId)
       .subscribe((response) => {
         this.listAnswers = response;
       });

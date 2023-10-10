@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { EMPTY, Observable } from 'rxjs';
 import { EMPTY_SUBSCRIPTION } from 'rxjs/internal/Subscription';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-hr-associate-create-candidate',
   templateUrl: './hr-associate-create-candidate.component.html',
@@ -44,7 +45,7 @@ export class HrAssociateCreateCandidateComponent {
       const user = this.formControl.value;
 
       this.client
-        .post('http://localhost:8080/hr/createcandidateaccount', user)
+        .post(environment.apiBaseUrl +'/hr/createcandidateaccount', user)
         .subscribe(
           (response) => {
             alert('Candidate saved');

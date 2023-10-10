@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConnectableObservable, isEmpty } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hr-associate-edit-candidate',
@@ -37,7 +38,7 @@ export class HrAssociateEditCandidateComponent {
     this.route.params.subscribe((parameters: any) => {
       this.personID = parameters.id;
       this.client
-        .get('http://localhost:8080/hr/candidate/' + this.personID)
+        .get(environment.apiBaseUrl +'/hr/candidate/' + this.personID)
         .subscribe((response) => {
           this.user = response;
           this.formControl.get('name')?.setValue(this.user.name);
@@ -56,7 +57,7 @@ export class HrAssociateEditCandidateComponent {
 
     this.client
       .post(
-        'http://localhost:8080/hr/modifycandidate/' +
+        environment.apiBaseUrl +'/hr/modifycandidate/' +
           this.personID +
           '/' +
           user.name,

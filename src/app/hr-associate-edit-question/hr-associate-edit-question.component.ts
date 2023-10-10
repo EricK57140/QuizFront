@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hr-associate-edit-question',
@@ -46,7 +47,7 @@ export class HrAssociateEditQuestionComponent {
     this.route.params.subscribe((parameters: any) => {
       this.questionID = parameters.id;
       this.client
-        .get('http://localhost:8080/hr/question/' + this.questionID)
+        .get(environment.apiBaseUrl +'/hr/question/' + this.questionID)
         .subscribe((response) => {
           this.question = response;
           this.formControl
@@ -70,7 +71,7 @@ export class HrAssociateEditQuestionComponent {
     });
     //this.selectedTechnology = this.question.technology.nameTechnology;
     this.client
-      .get('http://localhost:8080/hr/list-technology')
+      .get(environment.apiBaseUrl +'/hr/list-technology')
       .subscribe((reponse) => {
         this.listTechnologies = reponse;
       });
@@ -91,7 +92,7 @@ export class HrAssociateEditQuestionComponent {
     params = params.append('idTechnology', this.idTechnology);
 
     this.client
-      .post('http://localhost:8080/hr/question/create', question1, {
+      .post(environment.apiBaseUrl +'/hr/question/create', question1, {
         params: params,
       })
       .subscribe(

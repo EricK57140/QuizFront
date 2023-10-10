@@ -50,7 +50,7 @@ export class HrAssociateTechnologiesComponent {
       if (
         this.client
           .post(
-            'http://localhost:8080/hr/technology/disable/' + idTechnology,
+            environment.apiBaseUrl +'/hr/technology/disable/' + idTechnology,
             null
           )
           .subscribe()
@@ -66,7 +66,7 @@ export class HrAssociateTechnologiesComponent {
       const technology = this.formControl.value;
 
       this.client
-        .post('http://localhost:8080/hr/technology/create', technology)
+        .post(environment.apiBaseUrl +'/hr/technology/create', technology)
         .subscribe(
           (response) => {
             alert('Technology saved'), Error;

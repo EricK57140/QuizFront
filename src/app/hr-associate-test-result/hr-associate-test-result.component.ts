@@ -53,7 +53,7 @@ export class HrAssociateTestResultComponent {
         });
     });
     //   this.client
-    //     .get('http://localhost:8080/hr/list-questions-by-test/' + this.idTest)
+    //     .get(environment.apiBaseUrl +'/hr/list-questions-by-test/' + this.idTest)
     //     .pipe(map((response) => JSON.parse(JSON.stringify(response))))
     //     .subscribe((data) => {
     //       console.log(data);
@@ -67,7 +67,7 @@ export class HrAssociateTestResultComponent {
   }
   // getAnswers(questionId: number) {
   //   this.client
-  //     .get('http://localhost:8080/hr/list-answers/' + questionId)
+  //     .get(environment.apiBaseUrl +'/hr/list-answers/' + questionId)
   //     .subscribe((response) => {
   //       this.listAnswers = response;
   //     });
@@ -116,7 +116,7 @@ export class HrAssociateTestResultComponent {
   getAnswersCorrect(questionId: number) {
     this.client
       .get<{ correct: boolean }[]>(
-        'http://localhost:8080/hr/list-answers/' + questionId
+        environment.apiBaseUrl +'/hr/list-answers/' + questionId
       )
       .subscribe((answers) => {
         this.correctAnswers = answers.filter((answer) => answer.correct);

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TokenidentificationService } from '../token-identification.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorage } from '@ngx-pwa/local-storage';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-hr-associate-top-banner',
   templateUrl: './hr-associate-top-banner.component.html',
@@ -43,7 +44,7 @@ export class HrAssociateTopBannerComponent {
     });
 
     this.client
-      .get('http://localhost:8080/hr/email/' + this.email)
+      .get(environment.apiBaseUrl +'/hr/email/' + this.email)
       .subscribe((reponse) => (this.userConnexion = reponse));
 
     this.localStorage.getItem('language').subscribe((lang) => {

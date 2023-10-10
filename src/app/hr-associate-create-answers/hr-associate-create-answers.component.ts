@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hr-associate-create-answers',
@@ -70,7 +71,7 @@ export class HrAssociateCreateAnswersComponent {
     params = params.append('idTechnology', this.idTechnology);
 
     this.client
-      .post('http://localhost:8080/hr/question/create', question1, {
+      .post(environment.apiBaseUrl +'hr/question/create', question1, {
         params: params,
       })
       .subscribe(
@@ -92,7 +93,7 @@ export class HrAssociateCreateAnswersComponent {
     this.route.params.subscribe((parameters: any) => {
       this.questionID = parameters.id;
       this.client
-        .get('http://localhost:8080/hr/question/' + this.questionID)
+        .get(environment.apiBaseUrl +'hr/question/' + this.questionID)
         .subscribe((response) => {
           this.question = response;
           this.formControl
@@ -105,14 +106,14 @@ export class HrAssociateCreateAnswersComponent {
           this.formControl.get('timer')?.setValue(this.question.timer);
         });
       this.client
-        .get('http://localhost:8080/hr/list-answers/' + this.questionID)
+        .get(environment.apiBaseUrl +'/hr/list-answers/' + this.questionID)
         .subscribe((response) => {
           this.listAnswers = response;
         });
     });
 
     this.client
-      .get('http://localhost:8080/hr/list-technology')
+      .get(environment.apiBaseUrl +'/hr/list-technology')
       .subscribe((reponse) => {
         this.listTechnologies = reponse;
       });
@@ -123,7 +124,7 @@ export class HrAssociateCreateAnswersComponent {
       this.questionID = parameters.id;
 
       this.client
-        .get('http://localhost:8080/hr/list-answers/' + this.questionID)
+        .get(environment.apiBaseUrl +'/hr/list-answers/' + this.questionID)
         .subscribe((response) => {
           this.listAnswers = response;
         });
@@ -144,7 +145,7 @@ export class HrAssociateCreateAnswersComponent {
       params2 = params2.append('idQuestions', this.questionID);
 
       this.client
-        .post('http://localhost:8080/hr/answer/create', answerToSend, {
+        .post(environment.apiBaseUrl +'/hr/answer/create', answerToSend, {
           params: params2,
         })
         .subscribe(
@@ -166,7 +167,7 @@ export class HrAssociateCreateAnswersComponent {
     console.log(idAnswers);
 
     this.client
-      .get('http://localhost:8080/hr/answer/' + idAnswers)
+      .get(environment.apiBaseUrl +'/hr/answer/' + idAnswers)
       .subscribe((response) => {
         this.answer = response;
         this.formControlAnswer
@@ -196,7 +197,7 @@ export class HrAssociateCreateAnswersComponent {
     if (confirm('Are you sure to delete ')) {
       if (
         this.client
-          .post('http://localhost:8080/hr/answer/disable/' + id, null)
+          .post(environment.apiBaseUrl +'/hr/answer/disable/' + id, null)
           .subscribe()
       ) {
         alert('answer succesfully deleted');
