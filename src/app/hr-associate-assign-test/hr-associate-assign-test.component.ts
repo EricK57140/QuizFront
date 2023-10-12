@@ -122,13 +122,13 @@ export class HrAssociateAssignTestComponent {
   deleteTestAssigned(id: number) {
     let params = new HttpParams();
     params = params.append('idTestAssignation', id);
-
+    // params = params.append('candidateId', this.personID);
     this.client
       .post(environment.apiBaseUrl + 'hr/delete-testAssigned', null, {
         params: params,
       })
       .subscribe((response) => {
-        this.getTestsListPage();
+        // this.getTestsListPage();
         this.getTestsListAssigned();
       });
   }

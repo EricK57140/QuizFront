@@ -44,7 +44,7 @@ export class HrAssociateTopBannerComponent {
     });
 
     this.client
-      .get(environment.apiBaseUrl +'/hr/email/' + this.email)
+      .get(environment.apiBaseUrl +'hr/email/' + this.email)
       .subscribe((reponse) => (this.userConnexion = reponse));
 
     this.localStorage.getItem('language').subscribe((lang) => {

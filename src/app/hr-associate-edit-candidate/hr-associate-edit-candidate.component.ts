@@ -83,7 +83,7 @@ export class HrAssociateEditCandidateComponent {
 
     this.client
       .post(
-        'http://localhost:8080/hr/modifycandidate/' + this.personID,
+        environment.apiBaseUrl +'/hr/modifycandidate/' + this.personID,
         null,
 
         { params: params }
