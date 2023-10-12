@@ -102,12 +102,12 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
   },
   {
-    path: 'candidate-pass-test/:id',
+    path: 'candidate-pass-test/:id/:idTestAssignation',
     component: CandidatePassTestComponent,
     canActivate: [CandidateGuard],
   },
   {
-    path: 'hr-associate-test-result/:id',
+    path: 'hr-associate-test-result/:id/:idTestAssignation',
     component: HrAssociateTestResultComponent,
     canActivate: [HrAssociateGuard],
   },

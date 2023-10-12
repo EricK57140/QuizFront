@@ -118,7 +118,7 @@ export class HrAssociateAssignTestComponent {
   }
   goToPageResult(testId: number, testidAssignation: number) {
     this.router.navigateByUrl(
-      'hr-associate-test-result/' + testId + '/testidAssignation'
+      'hr-associate-test-result/' + testId + '/' + testidAssignation
     );
   }
   deleteTestAssigned(id: number) {

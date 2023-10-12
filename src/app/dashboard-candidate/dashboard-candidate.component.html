@@ -13,7 +13,8 @@
     <ng-container matColumnDef="AssignationDate">
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
       <mat-cell *matCellDef="let test">
-        <button mat-raised-button color="accent" (click)="takeTest(test?.test.idTest)">Take test</button>
+        <button mat-raised-button color="accent" (click)="takeTest(test?.test.idTest,test?.idTestAssignation)">Take
+          test</button>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
