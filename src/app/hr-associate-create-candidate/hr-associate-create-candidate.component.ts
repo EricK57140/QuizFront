@@ -45,7 +45,7 @@ export class HrAssociateCreateCandidateComponent {
       const user = this.formControl.value;
 
       this.client
-        .post(environment.apiBaseUrl +'/hr/createcandidateaccount', user)
+        .post(environment.apiBaseUrl + 'hr/createcandidateaccount', user)
         .subscribe(
           (response) => {
             alert('Candidate saved');
