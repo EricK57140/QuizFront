@@ -67,7 +67,7 @@ export class DashboardCandidateComponent {
       });
   }
 
-  takeTest(id: number) {
-    this.router.navigateByUrl('candidate-pass-test/' + id);
+  takeTest(id: number,idAssignation:number) {
+    this.router.navigateByUrl('candidate-pass-test/' + id +'/' + idAssignation);
   }
 }
