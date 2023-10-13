@@ -22,6 +22,7 @@ export class CandidatePassTestComponent {
   idTest: any;
   testId: any;
   testAssignation: any;
+  
 
   constructor(
     private tokenIdentification: TokenidentificationService,
@@ -74,7 +75,6 @@ export class CandidatePassTestComponent {
   saveAnswer() {
     this.route.params.subscribe((parameters: any) => {
       this.testId = parameters.id;
-      this.testAssignation = parameters.idAssignation;
       const questionId = this.currentQuestion.idQuestions;
       const answerId = this.selectedAnswer.idAnswers;
       console.log(questionId, answerId);

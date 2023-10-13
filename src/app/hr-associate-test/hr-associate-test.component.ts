@@ -83,7 +83,7 @@ export class HrAssociateTestComponent {
   saveTest() {
     const test = this.formControl.value;
     this.client
-      .post(environment.apiBaseUrl +'/hr/test/create', test)
+      .post(environment.apiBaseUrl + 'hr/test/create', test)
 
       .subscribe(
         (response) => {

@@ -28,10 +28,10 @@ export class HrAssociateAssignTestComponent {
   ];
 
   displayedColumnsTestsAssigned: string[] = [
-    // 'IdTestAssigned',
+    'IdTestAssigned',
     'Name',
     'AssignationDate',
-    'action'
+    'action',
   ];
   constructor(
     private route: ActivatedRoute,
@@ -116,8 +116,10 @@ export class HrAssociateAssignTestComponent {
     this.formControlSearch.get('search')?.setValue('');
     this.getTestListBySearch();
   }
-  goToPageResult(testId: number) {
-    this.router.navigateByUrl('hr-associate-test-result/' + testId);
+  goToPageResult(testId: number, testidAssignation: number) {
+    this.router.navigateByUrl(
+      'hr-associate-test-result/' + testId + '/' + testidAssignation
+    );
   }
   deleteTestAssigned(id: number) {
     let params = new HttpParams();
@@ -128,7 +130,7 @@ export class HrAssociateAssignTestComponent {
         params: params,
       })
       .subscribe((response) => {
-        // this.getTestsListPage();
+        alert('Test removed');
         this.getTestsListAssigned();
       });
   }
@@ -137,7 +139,7 @@ export class HrAssociateAssignTestComponent {
     search: [''],
   });
 
-  clitest(){
-    alert("jjjj")
+  clitest() {
+    alert('jjjj');
   }
 }

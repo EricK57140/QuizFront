@@ -100,7 +100,7 @@ export class HrAssociateTestResultComponent {
   }
   getTestResults() {
     this.route.params.subscribe((parameters: any) => {
-      this.testId = parameters.id;
+      this.testId = parameters.idTestAssignation;
       this.client
         .get(environment.apiBaseUrl + 'hr/testquestions/' + this.testId)
         .subscribe((testResults) => {
@@ -116,7 +116,7 @@ export class HrAssociateTestResultComponent {
   getAnswersCorrect(questionId: number) {
     this.client
       .get<{ correct: boolean }[]>(
-        environment.apiBaseUrl +'/hr/list-answers/' + questionId
+        environment.apiBaseUrl + '/hr/list-answers/' + questionId
       )
       .subscribe((answers) => {
         this.correctAnswers = answers.filter((answer) => answer.correct);

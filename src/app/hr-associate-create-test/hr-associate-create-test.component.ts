@@ -53,7 +53,7 @@ export class HrAssociateCreateTestComponent {
   saveTest() {
     const test = this.formControl.value;
     this.client
-      .post(environment.apiBaseUrl +'/hr/test/create', test)
+      .post(environment.apiBaseUrl + 'hr/test/create', test)
 
       .subscribe(
         (response) => {
@@ -71,7 +71,7 @@ export class HrAssociateCreateTestComponent {
     this.route.params.subscribe((parameters: any) => {
       this.idTest = parameters.id;
       this.client
-        .get(environment.apiBaseUrl +'/hr/test/' + this.idTest)
+        .get(environment.apiBaseUrl + 'hr/test/' + this.idTest)
         .subscribe((response) => {
           this.test = response;
           this.formControl.get('nameTest')?.setValue(this.test.nameTest);
@@ -82,7 +82,7 @@ export class HrAssociateCreateTestComponent {
     this.route.params.subscribe((parameters: any) => {
       this.idTest = parameters.id;
       this.client
-        .get(environment.apiBaseUrl +'/hr/list-questions-test/' + this.idTest)
+        .get(environment.apiBaseUrl + 'hr/list-questions-test/' + this.idTest)
         .subscribe((reponse) => (this.listQuestions = reponse));
     });
   }
@@ -100,7 +100,9 @@ export class HrAssociateCreateTestComponent {
 
       this.client
         .get(
-          environment.apiBaseUrl +'hr/questions-by-test-searchbar/' + this.idTest,
+          environment.apiBaseUrl +
+            'hr/questions-by-test-searchbar/' +
+            this.idTest,
           { params: params }
         )
         .subscribe((reponse) => (this.listQuestions = reponse));
@@ -111,7 +113,9 @@ export class HrAssociateCreateTestComponent {
     this.route.params.subscribe((parameters: any) => {
       this.idTest = parameters.id;
       this.client
-        .get(environment.apiBaseUrl +'/hr/list-questions-by-test/' + this.idTest)
+        .get(
+          environment.apiBaseUrl + 'hr/list-questions-by-test/' + this.idTest
+        )
         .subscribe((reponse) => (this.listQuestionsByTest = reponse));
     });
   }
@@ -127,7 +131,7 @@ export class HrAssociateCreateTestComponent {
       params = params.append('questionId', idQuestion);
 
       this.client
-        .post(environment.apiBaseUrl +'/hr/add-question-to-test/', null, {
+        .post(environment.apiBaseUrl + 'hr/add-question-to-test/', null, {
           params: params,
         })
         .subscribe((response) => {
@@ -150,7 +154,7 @@ export class HrAssociateCreateTestComponent {
 
             this.client
               .post(
-                environment.apiBaseUrl +'/hr/delete-question-from-test/',
+                environment.apiBaseUrl + 'hr/delete-question-from-test/',
                 null,
                 {
                   params: params,
@@ -170,7 +174,7 @@ export class HrAssociateCreateTestComponent {
     this.getQuestionList();
     this.getQuestionListByTest();
     this.client
-      .get(environment.apiBaseUrl +'/hr/list-technology')
+      .get(environment.apiBaseUrl + 'hr/list-technology')
       .subscribe((reponse) => {
         this.listTechnologies = reponse;
       });
