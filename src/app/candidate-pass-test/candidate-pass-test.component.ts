@@ -74,7 +74,7 @@ export class CandidatePassTestComponent {
 
   saveAnswer() {
     this.route.params.subscribe((parameters: any) => {
-      this.testId = parameters.id;
+      this.testAssignation = parameters.idTestAssignation;
       const questionId = this.currentQuestion.idQuestions;
       const answerId = this.selectedAnswer.idAnswers;
       console.log(questionId, answerId);
