@@ -73,10 +73,10 @@
 
 <div>
 
-  <mat-radio-group aria-label="Select an option">
-    <mat-radio-button value="1">All</mat-radio-button>
-    <mat-radio-button value="2">Created by me</mat-radio-button>
-  </mat-radio-group>
+  <mat-radio-group [(ngModel)]="selectedSQLType">
+    <mat-radio-button [value]="'request1'" (click)="handleSQLRequest()" [checked]="true">Request 1</mat-radio-button>
+    <mat-radio-button [value]="'request2'" (click)="handleSQLRequest()">Request 2</mat-radio-button>
+</mat-radio-group>
 
 
 

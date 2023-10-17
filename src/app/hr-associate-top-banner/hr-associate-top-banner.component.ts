@@ -45,7 +45,7 @@ export class HrAssociateTopBannerComponent {
 
     this.client
       .get(environment.apiBaseUrl +'hr/email/' + this.email)
-      .subscribe((reponse) => (this.userConnexion = reponse));
+      .subscribe((reponse) => {this.userConnexion = reponse;console.log(reponse)});
 
     this.localStorage.getItem('language').subscribe((lang) => {
       if (lang) {
@@ -54,5 +54,9 @@ export class HrAssociateTopBannerComponent {
         this.translate.use(t);
       }
     });
+  }
+
+  pageTest(personId: number) {
+    this.router.navigateByUrl('hr-associate-test/' + personId );
   }
 }

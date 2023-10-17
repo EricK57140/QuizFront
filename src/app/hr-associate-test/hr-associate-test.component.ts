@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { TokenidentificationService } from '../token-identification.service';
 import { CommonService } from '../common.service';
 import { environment } from 'src/environments/environment';
+import {MatRadioModule} from '@angular/material/radio';
 
 @Component({
   selector: 'app-hr-associate-test',
@@ -17,7 +18,12 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./hr-associate-test.component.scss'],
 })
 export class HrAssociateTestComponent {
+  selectedTestsView: any;
+  selectedSQLType: string = 'request1';
+  personId: any;
+
   constructor(
+    private route: ActivatedRoute,
     private tokenIdentification: TokenidentificationService,
     private client: HttpClient,
     private router: Router,
@@ -80,6 +86,14 @@ export class HrAssociateTestComponent {
       .subscribe((reponse: any) => (this.listTests = reponse));
   }
 
+  getTestsListPageById() {
+    this.route.params.subscribe((parameters: any) => {
+      this.personId = parameters.id;
+    this.commonService
+      .getTestsListById(this.personId)
+      .subscribe((reponse: any) => (this.listTests = reponse));
+  })
+  }
   saveTest() {
     const test = this.formControl.value;
     this.client
@@ -100,6 +114,8 @@ export class HrAssociateTestComponent {
   }
   ngOnInit() {
     this.getTestsListPage();
+    
+    
   }
 
   getTestListBySearch() {
@@ -116,5 +132,19 @@ export class HrAssociateTestComponent {
   clearValue() {
     this.formControlSearch.get('search')?.setValue('');
     this.getTestsListPage();
+  }
+
+  handleSQLRequest() {
+    if (this.selectedSQLType === 'request1') {
+      // Trigger SQL request 1 here
+      this.getTestsListPageById();
+      console.log('by me');
+      // this.sqlService.request1().subscribe((data) => { // handle data });
+    } else if (this.selectedSQLType === 'request2') {
+      // Trigger SQL request 2 here
+      this.getTestsListPage();
+      console.log('all');
+      // this.sqlService.request2().subscribe((data) => { // handle data });
+    }
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,13 @@ export class CommonService {
 
   getTestsList() {
     return this.client
-      .get('http://localhost:8080/hr/list-test')
+      .get(environment.apiBaseUrl + 'hr/list-test')
+      .pipe(map((reponse) => reponse));
+  }
+
+  getTestsListById(id:number) {
+    return this.client
+      .get(environment.apiBaseUrl + 'hr/list-test-by-id/' + id)
       .pipe(map((reponse) => reponse));
   }
 

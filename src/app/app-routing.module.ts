@@ -76,7 +76,7 @@ const routes: Routes = [
     canActivate: [HrAssociateGuard],
   },
   {
-    path: 'hr-associate-test',
+    path: 'hr-associate-test/:id',
     component: HrAssociateTestComponent,
     canActivate: [HrAssociateGuard],
   },
