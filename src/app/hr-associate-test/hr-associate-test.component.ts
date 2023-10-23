@@ -136,15 +136,13 @@ export class HrAssociateTestComponent {
 
   handleSQLRequest() {
     if (this.selectedSQLType === 'request1') {
-      // Trigger SQL request 1 here
+  
       this.getTestsListPageById();
-      console.log('by me');
-      // this.sqlService.request1().subscribe((data) => { // handle data });
+     
     } else if (this.selectedSQLType === 'request2') {
-      // Trigger SQL request 2 here
+  
       this.getTestsListPage();
-      console.log('all');
-      // this.sqlService.request2().subscribe((data) => { // handle data });
+   
     }
   }
 }

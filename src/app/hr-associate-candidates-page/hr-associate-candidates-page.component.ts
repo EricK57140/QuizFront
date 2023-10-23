@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TokenidentificationService } from '../token-identification.service';
 import { environment } from 'src/environments/environment';
 
@@ -30,6 +30,7 @@ export class HrAssociateCandidatesPageComponent {
   ];
   disableSelect = new FormControl(false);
   constructor(
+    private route: ActivatedRoute,
     private tokenIdentification: TokenidentificationService,
     private client: HttpClient,
     private formBuilder: FormBuilder,
@@ -37,7 +38,7 @@ export class HrAssociateCandidatesPageComponent {
   ) {}
 
   ngOnInit(): void {
-    this.getCandidateList();
+    this.getCandidateListByIdHr();
   }
 
   getCandidateList() {
@@ -95,4 +96,23 @@ export class HrAssociateCandidatesPageComponent {
     this.formControlSearch.get('search')?.setValue('');
     this.getCandidateList();
   }
+
+
+    getCandidateListByIdHr() {
+      this.route.params.subscribe((parameters: any) => {
+        this.personID = parameters.id;
+      this.client
+        .get(environment.apiBaseUrl + 'hr/list-candidate-hr/' + this.personID)
+        .subscribe((reponse) => (this.listPerson = reponse));
+      this.user = this.tokenIdentification.user.value.rights.includes('HR');
+      this.tokenIdentification.user.subscribe((user) => {
+        if (user != null) {
+          this.email = user.sub;
+        } else {
+          this.email = '';
+        }
+      });})
+    }
+
+
 }

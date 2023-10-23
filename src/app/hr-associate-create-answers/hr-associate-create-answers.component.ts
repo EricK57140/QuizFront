@@ -106,14 +106,14 @@ export class HrAssociateCreateAnswersComponent {
           this.formControl.get('timer')?.setValue(this.question.timer);
         });
       this.client
-        .get(environment.apiBaseUrl +'/hr/list-answers/' + this.questionID)
+        .get(environment.apiBaseUrl +'hr/list-answers/' + this.questionID)
         .subscribe((response) => {
           this.listAnswers = response;
         });
     });
 
     this.client
-      .get(environment.apiBaseUrl +'/hr/list-technology')
+      .get(environment.apiBaseUrl +'hr/list-technology')
       .subscribe((reponse) => {
         this.listTechnologies = reponse;
       });
@@ -124,7 +124,7 @@ export class HrAssociateCreateAnswersComponent {
       this.questionID = parameters.id;
 
       this.client
-        .get(environment.apiBaseUrl +'/hr/list-answers/' + this.questionID)
+        .get(environment.apiBaseUrl +'hr/list-answers/' + this.questionID)
         .subscribe((response) => {
           this.listAnswers = response;
         });
@@ -145,7 +145,7 @@ export class HrAssociateCreateAnswersComponent {
       params2 = params2.append('idQuestions', this.questionID);
 
       this.client
-        .post(environment.apiBaseUrl +'/hr/answer/create', answerToSend, {
+        .post(environment.apiBaseUrl +'hr/answer/create', answerToSend, {
           params: params2,
         })
         .subscribe(
@@ -167,7 +167,7 @@ export class HrAssociateCreateAnswersComponent {
     console.log(idAnswers);
 
     this.client
-      .get(environment.apiBaseUrl +'/hr/answer/' + idAnswers)
+      .get(environment.apiBaseUrl +'hr/answer/' + idAnswers)
       .subscribe((response) => {
         this.answer = response;
         this.formControlAnswer
@@ -197,7 +197,7 @@ export class HrAssociateCreateAnswersComponent {
     if (confirm('Are you sure to delete ')) {
       if (
         this.client
-          .post(environment.apiBaseUrl +'/hr/answer/disable/' + id, null)
+          .post(environment.apiBaseUrl +'hr/answer/disable/' + id, null)
           .subscribe()
       ) {
         alert('answer succesfully deleted');

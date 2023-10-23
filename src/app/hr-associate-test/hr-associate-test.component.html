@@ -4,7 +4,7 @@
 </div>
 <div class="demo-button-container">
 
-  <div>
+
     <form [formGroup]="formControl" (submit)="saveTest()">
 
       <mat-form-field class="example-form" appearance="fill" class="question" id="fieldQuestion">
@@ -15,7 +15,7 @@
       <button class=" example-form" mat-raised-button color="primary" type="submit">Save</button>
     </form>
   </div>
-  <div>
+  <div class="searchbar">
     <form [formGroup]="formControlSearch" (keyup)="getTestListBySearch()">
       <mat-form-field appearance="fill" class="searchbar">
         <mat-label>{{"Search for a test by name"|translate}}</mat-label>
@@ -26,7 +26,16 @@
       </mat-form-field>
     </form>
   </div>
-</div>
+  <div style="margin-left: 1%;">
+
+    <mat-radio-group [(ngModel)]="selectedSQLType">
+      <mat-radio-button [value]="'request1'" (click)="handleSQLRequest()" [checked]="true">All tests</mat-radio-button>
+      <mat-radio-button [value]="'request2'" (click)="handleSQLRequest()">My tests</mat-radio-button>
+  </mat-radio-group>
+  
+  
+  
+  </div>
 <div id="list-questions">
 
   <mat-table [dataSource]="listTests" class="mat-elevation-z8">
@@ -71,13 +80,3 @@
 
 </div>
 
-<div>
-
-  <mat-radio-group [(ngModel)]="selectedSQLType">
-    <mat-radio-button [value]="'request1'" (click)="handleSQLRequest()" [checked]="true">Request 1</mat-radio-button>
-    <mat-radio-button [value]="'request2'" (click)="handleSQLRequest()">Request 2</mat-radio-button>
-</mat-radio-group>
-
-
-
-</div>

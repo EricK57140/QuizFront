@@ -40,7 +40,7 @@ const routes: Routes = [
     canActivate: [HrAssociateGuard],
   },
   {
-    path: 'hr-associate-candidates-page',
+    path: 'hr-associate-candidates-page/:id',
     component: HrAssociateCandidatesPageComponent,
     canActivate: [HrAssociateGuard],
     runGuardsAndResolvers: 'always',
