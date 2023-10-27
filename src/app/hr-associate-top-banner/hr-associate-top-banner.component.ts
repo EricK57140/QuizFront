@@ -60,7 +60,7 @@ export class HrAssociateTopBannerComponent {
     this.router.navigateByUrl('hr-associate-test/' + personId );
   }
 
-  pageCandidates(personId: number) {
-    this.router.navigateByUrl('hr-associate-candidates-page/' + personId );
+  pageCandidates() {
+    this.router.navigateByUrl('hr-associate-candidates-page');
   }
 }

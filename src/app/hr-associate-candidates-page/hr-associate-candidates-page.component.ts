@@ -12,7 +12,8 @@ import { environment } from 'src/environments/environment';
 })
 export class HrAssociateCandidatesPageComponent {
   public listPerson: any = [];
-  public personID: number = 0;
+  public userConnexion: any;
+  public personID: any;
   public email: string = '';
   public user: any;
   public formControlSearch: FormGroup = this.formBuilder.group({
@@ -29,6 +30,7 @@ export class HrAssociateCandidatesPageComponent {
     'candidateToDelete',
   ];
   disableSelect = new FormControl(false);
+  
   constructor(
     private route: ActivatedRoute,
     private tokenIdentification: TokenidentificationService,
@@ -38,9 +40,26 @@ export class HrAssociateCandidatesPageComponent {
   ) {}
 
   ngOnInit(): void {
-    this.getCandidateListByIdHr();
+    this.user = this.tokenIdentification.user.value.rights.includes('HR');
+    this.tokenIdentification.user.subscribe((user) => {
+      if (user != null) {
+        this.email = user.sub;
+  
+        this.client
+          .get(environment.apiBaseUrl + 'hr/email/' + this.email)
+          .subscribe((response) => {
+            this.userConnexion = response;
+            console.log(response);
+            this.personID = this.userConnexion.personID; // Move this line inside the subscribe block
+            this.getCandidateListByIdHr(this.personID); // Move this line inside the subscribe block
+          });
+      } else {
+        this.email = '';
+      }
+    });
   }
-
+  
+  
   getCandidateList() {
     this.client
       .get(environment.apiBaseUrl + 'hr/list-candidate')
@@ -98,21 +117,16 @@ export class HrAssociateCandidatesPageComponent {
   }
 
 
-    getCandidateListByIdHr() {
-      this.route.params.subscribe((parameters: any) => {
-        this.personID = parameters.id;
+    getCandidateListByIdHr(personID:number) {
+      
+       // this.personID = this.userConnexion.personID;
       this.client
-        .get(environment.apiBaseUrl + 'hr/list-candidate-hr/' + this.personID)
+        .get(environment.apiBaseUrl + 'hr/list-candidate-hr/' + personID)
         .subscribe((reponse) => (this.listPerson = reponse));
-      this.user = this.tokenIdentification.user.value.rights.includes('HR');
-      this.tokenIdentification.user.subscribe((user) => {
-        if (user != null) {
-          this.email = user.sub;
-        } else {
-          this.email = '';
-        }
-      });})
-    }
+     
+      }
+  
+    
 
 
 }

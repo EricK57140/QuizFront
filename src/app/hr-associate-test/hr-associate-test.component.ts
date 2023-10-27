@@ -131,8 +131,45 @@ export class HrAssociateTestComponent {
   }
   clearValue() {
     this.formControlSearch.get('search')?.setValue('');
-    this.getTestsListPage();
+    if (this.selectedSQLType === 'request1') {
+
+    this.getTestsListPage();}
+    else if (this.selectedSQLType === 'request2') {
+      this.getTestsListPageById();
   }
+}
+  getTestsListBySearch() {
+    if (this.selectedSQLType === 'request2') {
+    this.route.params.subscribe((parameters: any) => {
+      this.personId = parameters.id;
+      const searchBar = this.formControlSearch.value.search;
+      let params = new HttpParams();
+      params = params.append('search', searchBar);
+
+      this.client
+        .get(
+          environment.apiBaseUrl +
+            'hr/listtest-searchbar/' +
+            this.personId,
+          { params: params }
+        )
+        .subscribe((reponse) => (this.listTests = reponse));
+    });
+  }  else if (this.selectedSQLType === 'request1') {
+  
+    const searchBar = this.formControlSearch.value.search;
+    let params = new HttpParams();
+    params = params.append('search', searchBar);
+
+    this.client
+      .get(environment.apiBaseUrl + 'hr/list-test-by-search', {
+        params: params,
+      })
+      .subscribe((reponse) => (this.listTests = reponse));
+ 
+  }
+  }
+
 
   handleSQLRequest() {
     if (this.selectedSQLType === 'request1') {

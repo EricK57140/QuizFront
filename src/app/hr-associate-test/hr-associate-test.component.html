@@ -16,7 +16,7 @@
     </form>
   </div>
   <div class="searchbar">
-    <form [formGroup]="formControlSearch" (keyup)="getTestListBySearch()">
+    <form [formGroup]="formControlSearch" (keyup)="getTestsListBySearch()">
       <mat-form-field appearance="fill" class="searchbar">
         <mat-label>{{"Search for a test by name"|translate}}</mat-label>
         <input matInput formControlName="search">

@@ -78,7 +78,7 @@ export class HrAssociateCreateQuestionComponent {
 
     this.client
       .post(
-        environment.apiBaseUrl +'/hr/question/create',
+        environment.apiBaseUrl +'hr/question/create',
         questions,
 
         { params: params }
