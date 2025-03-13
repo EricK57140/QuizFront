@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TokenidentificationService } from './token-identification.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HrAssociateGuard implements CanActivate {
+export class HrAssociateGuard  {
 constructor( private tokenIdentification : TokenidentificationService,
   private router : Router){
 
