@@ -43,10 +43,13 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HrAssociateAssignTestComponent } from './hr-associate-assign-test/hr-associate-assign-test.component';
 import { DashboardCandidateComponent } from './dashboard-candidate/dashboard-candidate.component';
-import { CandidateTopBannerComponent } from './candidate-top-banner/candidate-top-banner.component';
-import { CandidatePassTestComponent } from './candidate-pass-test/candidate-pass-test.component';
+import { CandidateTopBannerComponent } from './components/candidate-top-banner/candidate-top-banner.component';
+import { CandidatePassTestComponent } from './components/candidate-pass-test/candidate-pass-test.component';
 import { HrAssociateTestResultComponent } from './hr-associate-test-result/hr-associate-test-result.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TestComponent } from './test/test.component';
+import { SignalTryComponent } from './signal-try/signal-try.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +74,8 @@ import {MatMenuModule} from '@angular/material/menu';
     CandidateTopBannerComponent,
     CandidatePassTestComponent,
     HrAssociateTestResultComponent,
+    TestComponent,
+    SignalTryComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,6 +98,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatExpansionModule,
     MatRadioModule,
     MatSnackBarModule,
+    MatDialogModule,
 
     TranslateModule.forRoot({
       loader: {

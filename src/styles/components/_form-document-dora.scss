@@ -1,0 +1,14 @@
+.close-button {
+  position: absolute;
+  right: 0;
+  top: 24px;
+  transform: translateY(-50%);
+  z-index: 1000;
+}
+
+.card-tab {
+  border-color: transparent !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  box-shadow: none !important;
+}

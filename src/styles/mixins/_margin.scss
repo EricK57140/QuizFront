@@ -1,0 +1,29 @@
+@mixin margin($id, $size) {
+    .h_m-#{$id} {
+        margin: $size;
+    }
+
+    .h_mx-#{$id} {
+        margin: 0 $size;
+    }
+
+    .h_my-#{$id} {
+        margin: $size 0;
+    }
+
+    .h_mt-#{$id} {
+        margin: $size 0 0 0;
+    }
+
+    .h_mr-#{$id} {
+        margin: 0 $size 0 0;
+    }
+
+    .h_mb-#{$id} {
+        margin: 0 0 $size 0;
+    }
+
+    .h_ml-#{$id} {
+        margin: 0 0 0 $size;
+    }
+}

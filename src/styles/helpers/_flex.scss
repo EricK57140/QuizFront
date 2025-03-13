@@ -1,0 +1,39 @@
+.h_fx {
+    display: flex !important;
+}
+
+.h_fxGrow {
+    flex-grow: 1 !important;
+}
+
+.h_fxColumn {
+    flex-direction: column !important;
+}
+
+.h_fxRow {
+    flex-direction: row !important;
+}
+
+.h_fxSpaceBetween {
+    justify-content: space-between !important;
+}
+
+.h_fxSpaceEvenly {
+    justify-content: space-evenly !important;
+}
+
+.h_fxJustifyCenter {
+    justify-content: center !important;
+}
+
+.h_fxAlignCenter {
+    align-items: center !important;
+}
+
+.h_fxAlignStart {
+    justify-content: start !important;
+}
+
+.h_fxAlignEnd {
+    justify-content: end !important;
+}

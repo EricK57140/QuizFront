@@ -1,0 +1,5 @@
+@mixin border($name, $color) {
+    .h_solidBorder-#{$name} {
+        border: solid 2px $color;
+    }
+}

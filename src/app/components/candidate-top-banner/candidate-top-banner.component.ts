@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
-import { TokenidentificationService } from '../token-identification.service';
+import { TokenidentificationService } from '../../token-identification.service';
 
 @Component({
   selector: 'app-candidate-top-banner',

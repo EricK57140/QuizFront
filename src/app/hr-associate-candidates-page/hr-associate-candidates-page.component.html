@@ -1,67 +1,83 @@
-<app-hr-associate-top-banner></app-hr-associate-top-banner>
-<div>
-  <p></p>
-</div>
-<div class="demo-button-container">
-  <div>
-    <button mat-raised-button color="red" (click)="onCreateCandidate()" class="demo-button" style="border: solid;background-color:white;">
-      Create Candidate
-    </button>
+<div style="display: flex;flex-direction: column;gap:20px;margin-top: 20px;margin-left:50px">
+  <div class="demo-button-container">
+    <div>
+      <button mat-raised-button color="red" (click)="onCreateCandidate()" class="demo-button"
+        style="border: solid;background-color:white;">
+        Create Candidate
+      </button>
+    </div>
+    <div>
+      <form [formGroup]="formControlSearch" (keyup)=" getCandidateListBySearch()">
+        <div>
+          <mat-label></mat-label>
+          <input matInput placeholder='{{"Search for a candidate by name or firstname"|translate}}'
+            formControlName="search" class="search-bar">
+          <!-- <button matSuffix mat-icon-button aria-label="Clear" (click)="clearValue()">
+            <mat-icon>close</mat-icon>
+          </button> -->
+        </div>
+      </form>
+    </div>
+
   </div>
-  <div >
-    <form [formGroup]="formControlSearch" (keyup)=" getCandidateListBySearch()"  >
-      <mat-form-field   class="searchbar" >
-        <mat-label>{{"Search for a candidate by nale or firstname"|translate}}</mat-label>
-        <input matInput formControlName="search" >
-        <button matSuffix mat-icon-button aria-label="Clear" (click)="clearValue()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
-    </form>
-  </div>
+  <mat-card style="width:95%;kground-color: aqua;padding: 20px;">
 
-</div>
+    <mat-table [dataSource]="listPerson" class="mat-elevation-z8" style="border:solid">
+      <ng-container matColumnDef="personID">
+        <mat-header-cell *matHeaderCellDef>Identifiant Utilisateur </mat-header-cell>
+        <mat-cell *matCellDef="let person"> {{person?.personID}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Firstname">
+        <mat-header-cell *matHeaderCellDef>Firstname</mat-header-cell>
+        <mat-cell *matCellDef="let person"> {{person?.firstName}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let person"> {{person?.name}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell *matCellDef="let person"> {{person?.email}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>
 
-<div id="list-candidates">
-  <mat-table [dataSource]="listPerson" class="mat-elevation-z8" style="border:solid">
-    <ng-container matColumnDef="personID">
-      <mat-header-cell *matHeaderCellDef>Identifiant Utilisateur </mat-header-cell>
-      <mat-cell *matCellDef="let person"> {{person?.personID}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Firstname">
-      <mat-header-cell *matHeaderCellDef>Firstname</mat-header-cell>
-      <mat-cell *matCellDef="let person"> {{person?.firstName}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-      <mat-cell *matCellDef="let person"> {{person?.name}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
-      <mat-cell *matCellDef="let person"> {{person?.email}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="candidateToEdit">
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let person">
-        <button mat-raised-button color="accent" (click)="editCandidate(person?.personID)">Edit</button>
-      </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="candidateTest">
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let person">
-        <button mat-raised-button color="primary" (click)="assignTestToCandidate(person?.personID)">Tests</button>
-      </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="candidateToDelete">
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let person">
-        <button mat-raised-button class="buttonRefuse" (click)="deleteCandidate(person.personID); getCandidateList()"
-          style="border-color:black;border:solid;"> <span class="material-icons">delete_forever</span></button>
-      </mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+        </th>
+        <td mat-cell *matCellDef="let person">
+          <div style="display: flex;gap:2px;flex-direction: column;">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon style="color: #8c8c8d;">settings</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editCandidate(person?.personID)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit file details</span>
+              </button>
+
+              <button mat-menu-item (click)="assignTestToCandidate(person?.personID)">
+                <mat-icon matRippleDisabled="true">delete_sweep</mat-icon>
+                <span>Delete</span>
+              </button>
 
 
+
+
+              <button mat-icon-button (click)="deleteCandidate(person.personID); getCandidateList()">
+                <mat-icon style="color: #8c8c8d;" matRippleDisabled>delete_sweep</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+
+          </div>
+
+        </td>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+
+
+  </mat-card>
 </div>

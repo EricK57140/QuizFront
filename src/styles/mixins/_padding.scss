@@ -1,0 +1,29 @@
+@mixin padding($id, $size) {
+    .h_p-#{$id} {
+        padding: $size;
+    }
+
+    .h_px-#{$id} {
+        padding: 0 $size;
+    }
+
+    .h_py-#{$id} {
+        padding: $size 0;
+    }
+
+    .h_pt-#{$id} {
+        padding: $size 0 0 0;
+    }
+
+    .h_pr-#{$id} {
+        padding: 0 $size 0 0;
+    }
+
+    .h_pb-#{$id} {
+        padding: 0 0 $size 0;
+    }
+
+    .h_pl-#{$id} {
+        padding: 0 0 0 $size;
+    }
+}

@@ -1,0 +1,38 @@
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_counter_styles/Using_CSS_counters */
+form {
+    counter-reset: questionNumber 0;
+}
+
+app-question-container {
+    counter-increment: questionNumber 1;
+
+    position: relative;
+    margin-left: 40px;
+}
+
+app-question-container::before {
+    content: counter(questionNumber);
+
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 35px;
+    height: 32px;
+
+    margin-left: -40px;
+
+    background-color: #C9D3DD;
+
+    border-radius: 50%;
+    border-color: #C9D3DD;
+    border-width: 0.25px;
+    border-style: solid;
+
+    color: #444444;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.3;
+}

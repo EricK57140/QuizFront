@@ -1,16 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, NgModule } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormsModule,
-} from '@angular/forms';
+import { Component, Inject, NgModule } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
-import { EMPTY, Observable } from 'rxjs';
-import { EMPTY_SUBSCRIPTION } from 'rxjs/internal/Subscription';
-import { environment } from 'src/environments/environment';
+import {
+  MatDialogRef,
+  MatDialogClose,
+  MatDialog,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { CandidateService } from '../services/candidate.service';
+import { User } from '../models/user';
 @Component({
   selector: 'app-hr-associate-create-candidate',
   templateUrl: './hr-associate-create-candidate.component.html',
@@ -24,40 +22,44 @@ export class HrAssociateCreateCandidateComponent {
   public email: string = '';
   public emailToCheck: any;
   public z: string = '';
+  user = new User();
   constructor(
     private route: ActivatedRoute,
-    private client: HttpClient,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<HrAssociateCreateCandidateComponent>,
+    public dialog: MatDialog,
+    public candidateService: CandidateService
   ) {}
 
-  public formControl: FormGroup = this.formBuilder.group({
-    name: ['', [Validators.required]],
-    firstName: ['', [Validators.required]],
-    email: ['', [Validators.email, Validators.required]],
-    password: ['', [Validators.required]],
-  });
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.personID = this.data.personID;
+    console.log(this.data);
+  }
 
   save() {
-    if (this.formControl.valid) {
-      const user = this.formControl.value;
+    if (this.candidateService.form.valid) {
+      this.user = this.candidateService.form.value;
 
-      this.client
-        .post(environment.apiBaseUrl +'hr/createcandidateaccount', user)
-        .subscribe(
-          (response) => {
-            alert('Candidate saved');
-            this.router.navigate(['hr-associate-candidates-page']), Error;
-          },
-          (error) => {
-            if (error.status === 404) {
-              // Email does not exist, submit form
-              alert('Email already exist');
-            }
-          }
-        );
+      this.candidateService.createCandidate(this.user).subscribe({
+        next: () => {
+          alert('Candidate saved');
+          this.closeDialog();
+          this.get();
+          // window.location.reload();
+        },
+        error: (err) => {
+          console.error('Error saving file status:', err);
+        },
+      });
     }
+  }
+  get() {
+    this.candidateService.getCandidateListByIdHr(this.personID);
+    console.log('tttttttttttttttttttttttttttttt');
+  }
+  closeDialog() {
+    this.dialogRef.close();
   }
 }

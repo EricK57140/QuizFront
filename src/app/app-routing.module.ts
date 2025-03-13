@@ -18,8 +18,9 @@ import { HrAssociateTryTestComponent } from './hr-associate-try-test/hr-associat
 import { HrAssociateAssignTestComponent } from './hr-associate-assign-test/hr-associate-assign-test.component';
 import { DashboardCandidateComponent } from './dashboard-candidate/dashboard-candidate.component';
 import { CandidateGuard } from './candidate.guard';
-import { CandidatePassTestComponent } from './candidate-pass-test/candidate-pass-test.component';
+import { CandidatePassTestComponent } from './components/candidate-pass-test/candidate-pass-test.component';
 import { HrAssociateTestResultComponent } from './hr-associate-test-result/hr-associate-test-result.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   { path: '', component: ConnexionPageComponent },
@@ -110,6 +111,10 @@ const routes: Routes = [
     path: 'hr-associate-test-result/:id/:idTestAssignation',
     component: HrAssociateTestResultComponent,
     canActivate: [HrAssociateGuard],
+  },
+  {
+    path: 'ts-test',
+    component: TestComponent,
   },
 ];
 @NgModule({

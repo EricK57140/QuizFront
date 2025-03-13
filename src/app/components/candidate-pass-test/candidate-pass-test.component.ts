@@ -4,8 +4,8 @@ import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { CommonService } from '../common.service';
-import { TokenidentificationService } from '../token-identification.service';
+import { CommonService } from '../../common.service';
+import { TokenidentificationService } from '../../token-identification.service';
 
 @Component({
   selector: 'app-candidate-pass-test',
@@ -22,7 +22,6 @@ export class CandidatePassTestComponent {
   idTest: any;
   testId: any;
   testAssignation: any;
-  
 
   constructor(
     private tokenIdentification: TokenidentificationService,

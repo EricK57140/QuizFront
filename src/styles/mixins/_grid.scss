@@ -1,0 +1,6 @@
+@mixin grid($id) {
+    .h_gCol-#{$id} {
+        display: grid;
+        grid-template-columns: repeat($id, 1fr);
+    }
+}

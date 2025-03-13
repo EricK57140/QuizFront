@@ -1,0 +1,13 @@
+@mixin gap($id, $size) {
+    .h_gapx-#{$id} {
+        gap: 0 $size;
+    }
+
+    .h_gapy-#{$id} {
+        gap: $size 0;
+    }
+
+    .h_gap-#{$id} {
+        gap: $size;
+    }
+}

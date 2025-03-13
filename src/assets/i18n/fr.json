@@ -23,7 +23,11 @@
   "log out":"Déconnexion",
 
   "The candidate seclected is" : "Le candidat selectionné est",
-  "Search for a test":"Recherchez un test"
+  "Search for a test":"Recherchez un test",
+
+  "Search for a candidate by name or firstname": "Chercher un candidat par nom ou prénom"
+
+
 
 
 

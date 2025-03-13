@@ -38,11 +38,13 @@ export class HrAssociateEditCandidateComponent {
     this.route.params.subscribe((parameters: any) => {
       this.personID = parameters.id;
       this.client
-        .get(environment.apiBaseUrl +'/hr/candidate/' + this.personID)
+        .get(environment.apiBaseUrl + 'hr/candidate/' + this.personID)
         .subscribe((response) => {
           this.user = response;
-          this.formControl.get('name')?.setValue(this.user.name);
-          this.formControl.get('firstName')?.setValue(this.user.firstName);
+          console.log(response);
+          this.formControl.patchValue(this.user);
+          // this.formControl.get('name')?.setValue(this.user.name);
+          // this.formControl.get('firstName')?.setValue(this.user.firstName);
         });
     });
   }
@@ -57,7 +59,8 @@ export class HrAssociateEditCandidateComponent {
 
     this.client
       .post(
-        environment.apiBaseUrl +'/hr/modifycandidate/' +
+        environment.apiBaseUrl +
+          '/hr/modifycandidate/' +
           this.personID +
           '/' +
           user.name,
@@ -83,7 +86,7 @@ export class HrAssociateEditCandidateComponent {
 
     this.client
       .post(
-        environment.apiBaseUrl +'/hr/modifycandidate/' + this.personID,
+        environment.apiBaseUrl + '/hr/modifycandidate/' + this.personID,
         null,
 
         { params: params }

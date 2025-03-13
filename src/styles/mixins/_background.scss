@@ -1,0 +1,5 @@
+@mixin background($name, $color) {
+    .h_bgColor-#{$name} {
+        background-color: $color !important;
+    }
+}

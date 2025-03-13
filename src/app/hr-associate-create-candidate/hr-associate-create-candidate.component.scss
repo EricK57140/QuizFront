@@ -9,15 +9,7 @@
   grid-template-columns: 12;
 }
 
-.col1 {
-  grid-column: 1/2;
-}
 
-.col2 {
-  grid-column: 3/12;
-  display: grid;
-  grid-template-columns: 12;
-}
 
 form {
   display: flex;
@@ -34,12 +26,10 @@ form {
   display: flex;
   flex-direction: column;
   justify-items: flex-start;
+  align-items: center;
+  padding:50px
 }
 
 h1 {
-  margin: 50px;
-}
 
-*{
-  margin-left: 100px;
 }
