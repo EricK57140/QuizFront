@@ -4,11 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConnexionPageComponent } from './connexion-page/connexion-page.component';
 import { MatTableModule } from '@angular/material/table';
-import {
-  HttpClient,
-  HttpClientModule,
-  HTTP_INTERCEPTORS,
-} from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -51,68 +47,61 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TestComponent } from './test/test.component';
 import { SignalTryComponent } from './signal-try/signal-try.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    ConnexionPageComponent,
-    DashboardHrAssociateComponent,
-    NoAccessComponent,
-    HrAssociateCreateCandidateComponent,
-    HrAssociateTopBannerComponent,
-    HrAssociateCandidatesPageComponent,
-    HrAssociateEditCandidateComponent,
-    HrAssociateQuestionsComponent,
-    HrAssociateTechnologiesComponent,
-    HrAssociateCreateQuestionComponent,
-    HrAssociateEditQuestionComponent,
-    HrAssociateCreateAnswersComponent,
-    HrAssociateTestComponent,
-    HrAssociateCreateTestComponent,
-    HrAssociateTryTestComponent,
-    HrAssociateAssignTestComponent,
-    DashboardCandidateComponent,
-    CandidateTopBannerComponent,
-    CandidatePassTestComponent,
-    HrAssociateTestResultComponent,
-    TestComponent,
-    SignalTryComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatMenuModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatExpansionModule,
-    MatRadioModule,
-    MatSnackBarModule,
-    MatDialogModule,
-
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
-        deps: [HttpClient],
-      },
-    }),
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        ConnexionPageComponent,
+        DashboardHrAssociateComponent,
+        NoAccessComponent,
+        HrAssociateCreateCandidateComponent,
+        HrAssociateTopBannerComponent,
+        HrAssociateCandidatesPageComponent,
+        HrAssociateEditCandidateComponent,
+        HrAssociateQuestionsComponent,
+        HrAssociateTechnologiesComponent,
+        HrAssociateCreateQuestionComponent,
+        HrAssociateEditQuestionComponent,
+        HrAssociateCreateAnswersComponent,
+        HrAssociateTestComponent,
+        HrAssociateCreateTestComponent,
+        HrAssociateTryTestComponent,
+        HrAssociateAssignTestComponent,
+        DashboardCandidateComponent,
+        CandidateTopBannerComponent,
+        CandidatePassTestComponent,
+        HrAssociateTestResultComponent,
+        TestComponent,
+        SignalTryComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatMenuModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule,
+        MatExpansionModule,
+        MatRadioModule,
+        MatSnackBarModule,
+        MatDialogModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpTranslateLoader,
+                deps: [HttpClient],
+            },
+        })], providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
 
 export function httpTranslateLoader(http: HttpClient) {
